@@ -1,0 +1,18 @@
+header{
+    padding: 49px 0;
+    margin: 21px auto;
+}
+header h1 {
+    font-family: 'pnu', sans-serif;
+    font-size: 1.2rem;
+    background-color: #315e5e;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-weight: 500;
+}
+header h1 span {
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+}

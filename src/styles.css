@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'pnu';
+    src: url('assets/fonts/PNU-Regular.ttf');
+}
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    direction: rtl;
+    background-color: #f7fff4;
+}
+
+.container-size {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: 'pnu', sans-serif;
+}
