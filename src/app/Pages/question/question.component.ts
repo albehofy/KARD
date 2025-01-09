@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-question',
-  standalone: true,
-  imports: [],
-  templateUrl: './question.component.html',
-  styleUrl: './question.component.css'
+    selector: 'app-question',
+    imports: [],
+    templateUrl: './question.component.html',
+    styleUrl: './question.component.css'
 })
 export class QuestionComponent {
   @Input() id!: string;
