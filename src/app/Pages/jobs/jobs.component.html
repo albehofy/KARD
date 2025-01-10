@@ -1,5 +1,128 @@
-<div class="container-size">
-    <header>
-        <h1>الرئيسية &nbsp; / &nbsp;  <span>التوظيف</span></h1>
-    </header>
+<div class="data-holder">
+    <div class="Shapes_dots__1jMPc">
+    </div>
+    <div class="Shapes_dots__bottom">
+    </div>
+    <div class="container-size">
+        <p-breadcrumb class="max-w-full page-header" [model]="items" [home]="home">
+            <ng-template #item let-item>
+                <a class="cursor-pointer" [routerLink]="item.routerLink">
+                    {{item.label}}
+                    <i [class]="item.icon"></i>
+                </a>
+            </ng-template>
+            <ng-template #separator> / </ng-template>
+        </p-breadcrumb>
+
+        <div class="page-title">
+            <h2>طلب جديد - تسجيل بيانات طلب توظيف</h2>
+            <p>املأ النموذج أدناه لإرسال طلب الحصول على وظيفة بشركتنا</p>
+        </div>
+        <div class="form-group">
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(name)" />
+                    <label for="name">الإسم ثلاثي</label>
+                </p-floatlabel>
+                <!-- Validation messages -->
+                @if(name.empty) {
+                <small class="danger">يجب ادخال الاسم</small>
+                }@else if(name.invalid) {
+                <small class="danger">{{name.errorMessage}}</small>
+                }
+            </div>
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-inputnumber inputId="integeronly" class="w-100" autocomplete="off" [(ngModel)]="age"
+                        [ngClass]="{'ng-dirty ng-invalid': age > 99}" />
+                    <label for="names">العمر</label>
+                </p-floatlabel>
+                @if(age > 99 || age < 18) { <small class="danger">يجب ان لايقل عمر المتقدم عن 18 عاما وان لايزيد عن 99
+                    عاما</small>
+                    }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+            <div class="input-container phone-container flex">
+                <p-floatlabel variant="on">
+                    <input pInputText id="phone" [(ngModel)]="phone" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(phone)" />
+                    <label for="phone">رقم الهاتف</label>
+                </p-floatlabel>
+                <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" />
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-container-sm">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+
+            <div class="input-container-sm">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+            <div class="input-container-sm">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">النوع</label>
+                </p-floatlabel>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+
+            <div class="input-container files-container">
+                <div class="card justify-center">
+                    <p-toast position="bottom-left" [baseZIndex]="999999" />
+                    <p-fileupload mode="basic" class="w-100" name="demo[]" chooseIcon="pi pi-upload"
+                        url="https://www.primefaces.org/cdn/api/upload.php" accept=".pdf,.docx,image/*"
+                        maxFileSize="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true"
+                        chooseLabel="يرجى إرفاق السيرة الذاتية (اختياري)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-container">
+            <p-button label="إرسال الطلب" />
+        </div>
+
+    </div>
 </div>

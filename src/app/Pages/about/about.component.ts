@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { BackgoundPatternComponent } from "../../Components/backgound-pattern/backgound-pattern.component";
+import { ButtonModule } from 'primeng/button';
+import { BackgoundPatternComponent } from '../../Components/backgound-pattern/backgound-pattern.component';
 
 @Component({
     selector: 'app-about',
-    imports: [BackgoundPatternComponent],
+    imports: [BackgoundPatternComponent, ButtonModule],
     templateUrl: './about.component.html',
     styleUrl: './about.component.css'
 })

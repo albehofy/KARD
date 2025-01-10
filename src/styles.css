@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 @font-face {
     font-family: 'pnu';
     src: url('assets/fonts/PNU-Regular.ttf');
@@ -15,8 +17,10 @@ html, body{
 }
 
 .container-size {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
     font-family: 'pnu', sans-serif;
 }
+

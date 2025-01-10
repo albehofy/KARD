@@ -11,6 +11,7 @@
     background-color: #315e5e;
     overflow: hidden;
     font-family: "pnu", sans-serif;
+    z-index: 99999;
 }
 
 .navbar .menu-toggler {
@@ -76,6 +77,7 @@
         align-items: center;
         background-color: #315e5e;
         transition: all 0.5s ease;
+        z-index: 99999;
     }
 
     .navbar a.icon {
