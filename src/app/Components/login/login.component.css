@@ -1,0 +1,81 @@
+.holder {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /* overflow: hidden; */
+}
+
+.left-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #10b981;
+}
+
+.right-background{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #3d6859;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    /* height: 100vh; */
+    max-width: 450px;
+    min-width: 300px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    z-index: 99;
+}
+
+.login-container form {
+    width: 100%;
+    padding: 0 20px 20px;
+    /* background-color: #10b981; */
+    border-radius: 10px;
+}
+
+.login-container .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.login-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #10b981;
+    margin-bottom: 0px;
+    font-family: 'Pnu', 'sans-serif';
+}
+
+label {
+    color: #10b981;
+    font-family: 'Pnu', 'sans-serif';
+}
+
+::ng-deep .p-button {
+    width: 100%;
+}
+
+.w-75 {
+    width: 75%;
+}

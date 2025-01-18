@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+@font-face {
+    font-family: 'pnu';
+    src: url('assets/fonts/PNU-Regular.ttf');
+}
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    direction: rtl;
+    background-color: #04040e;
+}
+
+.container-size {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: 'pnu', sans-serif;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.p-1 {
+    padding: 0.25rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.p-3 {
+    padding: 0.75rem;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.my-1 {
+    padding: 0.25rem 0;
+}
+
+.my-2 {
+    padding: 0.5rem 0;
+}
+.my-3 {
+    padding: 0.75rem 0;
+}
+
+.my-4 {
+    padding: 0.75rem 0;
+}
+
+.ltr {
+    direction: ltr;
+}
