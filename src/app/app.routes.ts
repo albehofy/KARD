@@ -4,10 +4,14 @@ import { HomeComponent } from './Pages/home/home.component';
 import { SocialMediaComponent } from './Pages/social-media/social-media.component';
 
 export const routes: Routes = [
-    {path: '',component: LoginComponent},
-    {path: 'home',component: HomeComponent, children: [
-       {
-        path: 'socialMedia', component: SocialMediaComponent
-       }
+    {path: 'login',component: LoginComponent},
+    {path: '',component: HomeComponent,children: [
+        {path: 'socialMedia', component: SocialMediaComponent},
+    {path: 'contactUs', component: SocialMediaComponent},
+    {path: 'whoIsUs', component: SocialMediaComponent},
+    {path: 'jobs', component: SocialMediaComponent},
+    {path: 'inquires', component: SocialMediaComponent},
+    {path: 'commonQuestions', component: SocialMediaComponent},
     ]},
+    
 ];

@@ -1,11 +1,28 @@
-<nav class="top-nav">Top Nav</nav>
 <div class="content-container">
     <router-outlet></router-outlet>
 </div>
 <nav class="left-nav">
     <ul>
         <li>
-            <a [routerLink]="['socialMedia']">social media</a>
+            <a [routerLink]="['']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">الرئيسية</a>
+        </li>
+        <li>
+            <a [routerLink]="['/whoIsUs']" [routerLinkActive]="'active'">من نحن</a>
+        </li>
+        <li>
+            <a [routerLink]="['/contactUs']" [routerLinkActive]="'active'">تواصل معنا</a>
+        </li>
+        <li>
+            <a [routerLink]="['/jobs']" [routerLinkActive]="'active'">التوظيف</a>
+        </li>
+        <li>
+            <a [routerLink]="['/commonQuestions']" [routerLinkActive]="'active'">الاسئلة الشائعة</a>
+        </li>
+        <li>            
+            <a [routerLink]="['/inquires']" [routerLinkActive]="'active'">الاستفسارات والشكاوى</a>
+        </li>
+        <li>
+            <a [routerLink]="['/socialMedia']" [routerLinkActive]="'active'">مواقع التواصل</a>
         </li>
     </ul>
 </nav>

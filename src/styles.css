@@ -16,6 +16,7 @@
 html, body{
     direction: rtl;
     background-color: #04040e;
+    font-family: 'pnu', sans-serif;
 }
 
 .container-size {
