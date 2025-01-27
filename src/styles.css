@@ -15,12 +15,35 @@ html, body{
     direction: rtl;
     background-color: #f7fff4;
 }
-
+.container {
+    font-family: 'pnu', sans-serif;
+}
 .container-size {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
     font-family: 'pnu', sans-serif;
+}
+
+.pt-3 {
+    padding-top: 0.75rem;
+}
+
+.pt-4 {
+    padding-top: 1rem;
+}
+
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.text-center {
+    text-align: center;
 }
 

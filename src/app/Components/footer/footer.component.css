@@ -18,6 +18,10 @@ h3 {
     padding: 14px 0 7px;
 }
 
+img {
+    max-width: 100%;
+}
+
 .footer-links {
     display: flex;
     justify-content: center;

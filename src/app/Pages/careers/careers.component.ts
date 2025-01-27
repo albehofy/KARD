@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { OrderComponent } from "../../Components/order/order.component";
 
 @Component({
     selector: 'app-careers',
-    imports: [],
+    imports: [OrderComponent],
     templateUrl: './careers.component.html',
     styleUrl: './careers.component.css'
 })

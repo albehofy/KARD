@@ -1,0 +1,74 @@
+<div class="data-holder">
+    <div class="Shapes_dots__1jMPc">
+    </div>
+    <div class="Shapes_dots__bottom">
+    </div>
+    <div class="container-size">
+        <!-- <p-breadcrumb class="max-w-full page-header" [model]="items" [home]="home">
+            <ng-template #item let-item>
+                <a class="cursor-pointer" [routerLink]="item.routerLink">
+                    {{item.label}}
+                    <i [class]="item.icon"></i>
+                </a>
+            </ng-template>
+            <ng-template #separator> / </ng-template>
+        </p-breadcrumb> -->
+
+        <div class="page-title">
+            <p>املأ النموذج أدناه لإرسال طلبك بشكل صحيح</p>
+        </div>
+        <div class="form-group">
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(name)" />
+                    <label for="name">الإسم</label>
+                </p-floatlabel>
+                <!-- Validation messages -->
+                @if(name.empty) {
+                <small class="danger">يجب ادخال الاسم</small>
+                }@else if(name.invalid) {
+                <small class="danger">{{name.errorMessage}}</small>
+                }
+            </div>            
+        </div>
+        <div class="form-group">
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <input pInputText id="company" [(ngModel)]="comapny.value" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(name)" />
+                    <label for="name">الشركة</label>
+                </p-floatlabel>
+                <!-- Validation messages -->
+                @if(name.empty) {
+                <small class="danger">يجب ادخال اسم الشركة</small>
+                }@else if(name.invalid) {
+                <small class="danger">{{name.errorMessage}}</small>
+                }
+            </div>       
+            <div class="input-container phone-container flex">
+                <p-floatlabel variant="on">
+                    <input pInputText id="phone" [(ngModel)]="phone" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(phone)" />
+                    <label for="phone">رقم الهاتف</label>
+                </p-floatlabel>
+                <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" />
+            </div>     
+        </div>
+
+        <div class="form-group">
+            <div class="input-container">
+
+                <label for="notes">اضافة ملاحظات</label>
+                <textarea pTextarea id="notes" class="w-100 text-area" style="resize: none" [(ngModel)]="notes.value" autocomplete="off" required
+                (change)="checkValidation(name)"></textarea>
+            </div>
+        </div>
+
+
+        <div class="submit-container">
+            <p-button label="إرسال الطلب" />
+        </div>
+
+    </div>
+</div>
