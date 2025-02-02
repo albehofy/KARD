@@ -1,6 +1,19 @@
-.container {
+.data-holder {
     background-color: #fff;
 }
+
+.special-form-holder {
+    border-bottom: 1px solid #ddd;
+}
+
+.container {
+    width: 75%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    min-width: 270px;
+}
+
 .special-header {
     width: max-content;
     max-width: 80%;
@@ -12,14 +25,14 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f7fff4;
+    background-color: #c0c0f7;
     z-index: 999;
     font-weight: 200;
     font-size: 1.5rem;
 }
 
 .wrapper {
-    padding: 21px 0;
+    padding: 21px 0 0 0;
     width: 100%;
     min-height: 149px;
     position: relative;
@@ -44,10 +57,26 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 15px 49px;
     font-family: 'pnu', sans-serif;
     font-size: 1.15rem;
     font-weight: 100;
-    line-height: 2.5;
+    line-height: 3;
     text-align: center;
+}
+
+.bg-c0c0f7 {
+    /* margin: 0 0 21px 0; */
+    /* background-color: #c0c0f7; */
+}
+
+.bg-white {
+    /* background-color: #fff; */
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        font-size: 1rem;
+        text-align: justify;
+    }
 }

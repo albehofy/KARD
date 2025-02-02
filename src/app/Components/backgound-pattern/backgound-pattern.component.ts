@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrl: './backgound-pattern.component.css'
 })
 export class BackgoundPatternComponent {
-  @Input() patternType: string = 'pattern-1';
+  @Input() patternType: string = 'Arabic-letters';
 
 }

@@ -4,13 +4,13 @@
     <img src="/assets/images/payments.png" alt="">
 
     <ul class="flex footer-links">
-        <li><a [routerLink]="[]">طرق الدفع</a></li>
-        <li><a [routerLink]="[]">شروط الاستخدام</a></li>
-        <li><a [routerLink]="[]">الشهادة الضريبية</a></li>
-        <li><a [routerLink]="[]">سياسة لتوصيل والخدمة</a></li>
-        <li><a [routerLink]="[]">سياسة الخصوصية</a></li>
-        <li><a [routerLink]="[]">سياسة الاسترجاع</a></li>
-        <li><a [routerLink]="[]">شهادة توثيق التجارة الالكترونية </a></li>
+        <li><a [routerLink]="['/terms-and-payments']"> طرق الدفع وشروط الاستخدام</a></li>
+        <!-- <li><a [routerLink]="[]">شروط الاستخدام</a></li> -->
+        <li><a [routerLink]="['/tax-certificate']">الشهادة الضريبية</a></li>
+        <!-- <li><a [routerLink]="[]">سياسة لتوصيل والخدمة</a></li> -->
+        <li><a [routerLink]="['/privacy-policy']">سياسة الخصوصية</a></li>
+        <li><a [routerLink]="['/return-edit-policy']">سياسة التوصيل والاسترجاع</a></li>
+        <li><a [routerLink]="['/e-commerce-authentication']">شهادة توثيق التجارة الالكترونية </a></li>
     </ul>
 
     <p>رقم السجل التجاري ({{CRN}}) &nbsp;&nbsp;

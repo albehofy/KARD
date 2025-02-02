@@ -49,14 +49,14 @@
                 <p-floatlabel variant="on">
                     <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
                         placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <label for="names">الجنس</label>
                 </p-floatlabel>
             </div>
             <div class="input-container phone-container flex">
                 <p-floatlabel variant="on">
                     <input pInputText id="phone" [(ngModel)]="phone" class="w-100" autocomplete="off" required
                         (change)="checkValidation(phone)" />
-                    <label for="phone">رقم الهاتف</label>
+                    <label for="phone">الجوال</label>
                 </p-floatlabel>
                 <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" />
             </div>
@@ -66,16 +66,16 @@
 
             <div class="input-container">
                 <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <p-select [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"
+                        placeholder="Select a city" class="w-100" />
+                    <label for="names">المدينة</label>
                 </p-floatlabel>
             </div>
             <div class="input-container">
                 <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                    <p-select [options]="nationalities" [(ngModel)]="selectedNationality" optionLabel="name"
                         placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <label for="names">الجنسية</label>
                 </p-floatlabel>
             </div>
         </div>
@@ -83,32 +83,28 @@
         <div class="form-group">
             <div class="input-container-sm">
                 <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                    <p-select [options]="jobs" [(ngModel)]="selectedJob" optionLabel="name"
                         placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
-            </div>
-
-            <div class="input-container-sm">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <label for="names">الوظيفة</label>
                 </p-floatlabel>
             </div>
             <div class="input-container-sm">
                 <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
+                    <p-select [options]="educations" [(ngModel)]="selectedEducation" optionLabel="name"
                         placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <label for="names">المرحلة التعليمية</label>
+                </p-floatlabel>
+            </div>
+            <div class="input-container-sm">
+                <p-floatlabel variant="on">
+                    <p-select [options]="experincesYears" [(ngModel)]="selectedExperincesYears" optionLabel="name"
+                        placeholder="Select a gender" class="w-100" />
+                    <label for="names">عدد سنوات الخبرة</label>
                 </p-floatlabel>
             </div>
         </div>
 
-
-
         <div class="form-group">
-
             <div class="input-container files-container">
                 <div class="card justify-center">
                     <p-toast position="bottom-left" [baseZIndex]="999999" />

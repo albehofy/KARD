@@ -23,7 +23,7 @@
                 <p-floatlabel variant="on">
                     <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
                         (change)="checkValidation(name)" />
-                    <label for="name">الإسم ثلاثي</label>
+                    <label for="name">الإسم ثلاثي: </label>
                 </p-floatlabel>
                 <!-- Validation messages -->
                 @if(name.empty) {
@@ -31,7 +31,7 @@
                 }@else if(name.invalid) {
                 <small class="danger">{{name.errorMessage}}</small>
                 }
-            </div>            
+            </div>
         </div>
 
 
@@ -40,7 +40,37 @@
                 <p-floatlabel variant="on">
                     <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
                         placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
+                    <label for="names">المدينة: </label>
+                </p-floatlabel>
+            </div>
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(name)" />
+                    <label for="name">الحي: </label>
+                </p-floatlabel>
+                <!-- Validation messages -->
+                @if(name.empty) {
+                <small class="danger">يجب ادخال الاسم</small>
+                }@else if(name.invalid) {
+                <small class="danger">{{name.errorMessage}}</small>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <!-- <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="gender"
+                        placeholder="Select request type" class="w-100" />
+                    <label for="gender">نوع الطلب: </label>
+                </p-floatlabel>
+            </div> -->
+            <div class="input-container">
+                <p-floatlabel variant="on">
+                    <p-select [options]="requestTypes" id="requestTypes" [(ngModel)]="selectedRequestType"
+                        optionLabel="name" placeholder="Select a gender" class="w-100" />
+                    <label for="requestTypes">نوع الطلب: </label>
                 </p-floatlabel>
             </div>
 
@@ -55,23 +85,13 @@
         </div>
 
         <div class="form-group">
-
             <div class="input-container">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
+                <label for="notes">اضافة ملاحظات: </label>
+                <textarea pTextarea id="notes" class="w-100 text-area" style="resize: none" [(ngModel)]="notes.value"
+                    autocomplete="off" required (change)="checkValidation(name)"></textarea>
             </div>
         </div>
-
+        <!-- 
         <div class="form-group">
             <div class="input-container-sm">
                 <p-floatlabel variant="on">
@@ -95,7 +115,8 @@
                     <label for="names">النوع</label>
                 </p-floatlabel>
             </div>
-        </div>
+        </div> -->
+        <p class="text-blue">*جميع الشكاوى تخضع لرقابة مباشرة من الإدارة العامة</p>
 
 
         <div class="submit-container">

@@ -15,6 +15,6 @@ export const appConfig: ApplicationConfig = {
                 preset: Aura
             }
         }), 
-        provideHttpClient()
+        provideHttpClient(), provideAnimationsAsync()
   ]
 };

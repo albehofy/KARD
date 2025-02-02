@@ -172,3 +172,21 @@ margin: 14px auto;
 .flex {
 display: flex;
 }
+
+
+.text-area {
+    padding: 21px 14px;
+    height: 77px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1.25rem;
+}
+
+textarea:focus{
+    border: transparent;
+    outline: 1px solid #10b981;
+}
+
+.text-blue {
+color: #5e46b6;
+}

@@ -8,7 +8,11 @@ import { FeedbackComponent } from './Pages/feedback/feedback.component';
 import { CommonQuestionsComponent } from './Pages/common-questions/common-questions.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
 import { QuestionComponent } from './Pages/question/question.component';
-
+import { PaymentsMethodsAndTermsComponent } from './Pages/payments-methods-and-terms/payments-methods-and-terms.component';
+import { ReturnOrEditProductComponent } from './Pages/return-or-edit-product/return-or-edit-product.component';
+import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.component';
+import { TaxCertificateComponent } from './Pages/tax-certificate/tax-certificate.component';
+import { ECommerceAuthenticationCertificateComponent } from './Pages/e-commerce-authentication-certificate/e-commerce-authentication-certificate.component';
 export const routes: Routes = [
     {path: '',component: HomeComponent},
     { path: 'about', component: AboutComponent },
@@ -18,5 +22,10 @@ export const routes: Routes = [
     { path: 'feedback', component: FeedbackComponent },
     { path: 'commonQuestions/:id', component: QuestionComponent },
     { path: 'commonQuestions', component: CommonQuestionsComponent },
+    { path:'terms-and-payments',component:PaymentsMethodsAndTermsComponent},
+    { path:'return-edit-policy',component:ReturnOrEditProductComponent},
+    { path:'privacy-policy',component: PrivacyPolicyComponent},
+    { path:'tax-certificate',component: TaxCertificateComponent},
+    { path:'e-commerce-authentication',component: ECommerceAuthenticationCertificateComponent},
     { path: '**', component: PageNotFoundComponent }
 ];

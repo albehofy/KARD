@@ -13,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 
-interface Gender {
+interface Select {
     name: string;
     code: number;
 }
@@ -39,7 +39,14 @@ export class FeedbackComponent implements OnInit {
         empty: false,
         errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
     }
-    gender: Gender[] = [
+    notes = {
+        pattern: "^[\u0621-\u064A]{2,}",
+        value: "",
+        invalid: false,
+        empty: false,
+        errorMessage: "الرجاء إدخال اسم الشركة باللغة العربية"
+    }
+    gender: Select[] = [
         {
             name: "ذكر",
             code: 1
@@ -49,9 +56,20 @@ export class FeedbackComponent implements OnInit {
             code: 2
         }
     ];
-    selectedGender = this.gender[0];
-    age:any;
+    requestTypes: Select[] = [
+        {
+            name: "تعديل",
+            code: 1
+        },
+        {
+            name: "شكوى",
+            code: 2
+        }
+    ];
 
+    selectedGender = this.gender[0];
+    selectedRequestType = this.requestTypes[0];
+    age:any;
     phone = '';
     home: MenuItem | undefined;
 
@@ -88,6 +106,4 @@ export class FeedbackComponent implements OnInit {
             item.invalid = true;
         }
     }
-    
-
 }

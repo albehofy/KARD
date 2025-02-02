@@ -1,0 +1,26 @@
+<div class="slider-container">
+    <div class="overlay">
+        <img [src]="images[currentImageIndex]" class="slider" alt="slider 1">
+        <div class="slider-parts">
+            <!-- <i class="fa-solid fa-chevron-right scroll-right"></i> -->
+            <!-- @for (img of images; track $index) {
+                <img [src]="img"  (click)="goToSlide($index)" alt="slider image" [ngClass]="{'active': $index === currentImageIndex}">
+            } -->
+            @if (currentImageIndex == 0) {
+                <img [src]="images[images.length -1]" (click)="goToSlide(images.length - 1)" alt="">
+                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==   currentImageIndex} " (click)="goToSlide(currentImageIndex)" alt="">
+                <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
+            }@else if (currentImageIndex == images.length - 1) {
+                <img [src]="images[currentImageIndex -1]"  alt="">
+                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==  currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
+                <img [src]="images[0]" (click)="goToSlide(0)" alt="">
+            }@else {
+                <img [src]="images[currentImageIndex - 1]" alt="">
+                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==  currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
+                <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
+            }
+            <!-- <i class="fa-solid fa-chevron-left scroll-left" (click)="previousSlide()"></i> -->
+        </div>
+    </div>
+    <button>open video</button>
+</div>

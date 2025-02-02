@@ -1,0 +1,29 @@
+.data-holder {
+    padding: 35px 0;
+}
+
+.tax-certificate{
+    padding: 14px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'pnu', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #617b7b;
+    padding-top: 21px;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.certificate {
+    display: block;
+    width: 75%;
+    min-width: 270px;
+    height: auto;
+    margin: 14px auto;
+    border-radius: 8px;
+}

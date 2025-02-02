@@ -1,6 +1,9 @@
 .container {
+    margin: auto;
+    min-width: 270px;
     font-family: pnu, sans-serif;
     background-color: initial;
+
 }
 
 .contact-header {
@@ -47,10 +50,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: 0;
+    gap: 14px;
     flex-wrap: wrap;
-    /* height: 90vh; */
-
 }
 
 .title {

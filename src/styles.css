@@ -1,4 +1,5 @@
 @import "primeicons/primeicons.css";
+@import 'swiper/swiper-bundle.css';
 
 @font-face {
     font-family: 'pnu';
@@ -47,3 +48,23 @@ html, body{
     text-align: center;
 }
 
+
+.w-50{
+    width: 50%;
+    min-width: 270px;
+} 
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.list-none {
+    list-style-type: none;
+}
+
+.list-circle {
+    list-style-type: circle;
+ }
