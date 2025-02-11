@@ -130,4 +130,9 @@ export class FeedbackComponent implements OnInit {
             item.invalid = true;
         }
     }
+
+
+    addFeedback() {
+        
+    }
 }
