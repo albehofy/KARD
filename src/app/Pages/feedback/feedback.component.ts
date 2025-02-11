@@ -56,6 +56,29 @@ export class FeedbackComponent implements OnInit {
             code: 2
         }
     ];
+    cities: Select[] = [
+        { name: "الرياض", code: 1 },
+        { name: "الخرج", code: 2 },
+        { name: "جدة", code: 3 },
+        { name: "مكة المكرمة", code: 4 },
+        { name: "المدينة المنورة", code: 5 },
+        { name: "الدمام", code: 6 },
+        { name: "الخبر", code: 7 },
+        { name: "الاحساء", code: 8 },
+        { name: "القطيف", code: 9 },
+        { name: "الطائف", code: 10 },
+        { name: "بريدة", code: 11 },
+        { name: "عنيزة", code: 12 },
+        { name: "حائل", code: 13 },
+        { name: "تبوك", code: 14 },
+        { name: "أبها", code: 15 },
+        { name: "خميس مشيط", code: 16 },
+        { name: "جازان", code: 17 },
+        { name: "نجران", code: 18 },
+        { name: "الباحة", code: 19 },
+        { name: "سكاكا", code: 20 },
+        { name: "عرعر", code: 21 }
+    ];
     requestTypes: Select[] = [
         {
             name: "تعديل",
@@ -68,6 +91,7 @@ export class FeedbackComponent implements OnInit {
     ];
 
     selectedGender = this.gender[0];
+    selectedCity = this.cities[0];
     selectedRequestType = this.requestTypes[0];
     age:any;
     phone = '';

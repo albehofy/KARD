@@ -1,9 +1,26 @@
-<app-auto-scroll-slider/>
+    <app-auto-scroll-slider />
 
-<!-- offers -->
-<app-offer-card/>
+<section class="py-5 my-5">
+    <!-- offers -->
+    <app-offer-card />
+</section>
 
-<!-- overview -->
- <app-overview/>
+<h1>مجموعتنا المميزة</h1>
+<section class="py-5 my-5 images-holder">
+    @for (product of productsImagesUrl; track $index) {
+        <img [src]="product.photo" alt="section-title" class="section-title">
 
- <app-home-adds/>
+    }
+</section>
+
+
+
+<section class="py-5 my-5">
+    <!-- overview -->
+    <app-overview />
+</section>
+
+<section class="py-5 my-5">
+    <!-- adds -->
+    <app-home-adds [logos]="logos" />
+</section>

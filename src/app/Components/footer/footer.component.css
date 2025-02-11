@@ -2,8 +2,8 @@ footer{
     padding: 21px 14px 7px;
     font-family: 'pnu', sans-serif;
     text-align: center;
-    color: #ccc;
-    background-color: #315e5e;
+    color: #000;
+    background-color: #a7a79d;
     font-size: 12px;
 }
 
@@ -11,7 +11,7 @@ footer{
         padding: 14px 0 0;
         font-size: 16px;
         font-weight: 600;
-        color: #FFF;
+        color: #000;
 }
 
 h3 {
@@ -33,7 +33,7 @@ img {
 }
 
 .footer-links a {
-    color: #ccc;
+    color: #000;
     text-decoration: none;
     font-size: 11px;
     transition: all 200ms ease;
@@ -43,6 +43,6 @@ img {
     padding: 21px 0 0;
     display: inline-flex;
     margin: auto;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #000;
     direction: ltr;
 }

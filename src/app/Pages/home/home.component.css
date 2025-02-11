@@ -1,0 +1,32 @@
+.py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.my-5 {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+}
+
+h1 {
+    font-family: 'pnu', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 20px;
+}
+.images-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 21px;
+    margin-top: 20px;
+    background-color: transparent;
+    font-family: 'pnu', sans-serif;
+    text-align: center;
+}
+
+.images-holder img {
+    width: 49%;
+    max-width: 100%;
+    box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
+}

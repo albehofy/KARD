@@ -5,15 +5,15 @@
     margin: 0 auto;
 }
 
-.container h1 {
+h1 {
     text-align: center;
-    color: #617b7b;
     padding-top: 21px;
     padding-left: 7px;
     padding-right: 7px;
     width: max-content;
     margin: 0 auto;
-    border-bottom: 1px solid #617b7b;
+    border-bottom: 1px solid #000;
+    font-size: 3.5em;
 }
 
 .offers {
@@ -33,7 +33,7 @@
     /* border: 1px solid #617b7b; */
     display: flex;
     flex-direction: column;
-    margin: 21px 14px;
+    margin: 21px 7px;
     cursor: pointer;
     color: #333;
     text-decoration: none;
@@ -45,7 +45,7 @@
 .offers .offer-card img {
     width: auto;
     max-width: 100%;
-    max-height: 450px;
+    max-height: 430px;
     /* max-height: 300px; */
     /* border-radius: 14px 14px 0 0; */
     border-radius: 30% 15% 10% 30%;

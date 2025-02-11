@@ -1,0 +1,140 @@
+.data-holder {
+    margin-top: 49px;
+}
+.container-size {
+    width: 100%;
+    margin-bottom: 50px;
+    padding-bottom: 14px;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.logo {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin-bottom: 27px;
+}
+
+
+::ng-deep p-breadcrumb nav {
+    margin-bottom: 14px;
+    padding: 0 !important;
+}
+
+
+::ng-deep .p-breadcrumb-list {
+    font-size: 1.2em;
+}
+
+::ng-deep .p-breadcrumb-list a {
+    color: #315e5e;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+::ng-deep .p-breadcrumb-list ::ng-deep .p-breadcrumb-separator {
+    color: #315e5e;
+}
+
+::ng-deep .p-breadcrumb-list span {
+    color: #315e5e;
+    font-size: 1.2em;
+
+}
+
+header h1 span {
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+}
+
+.page-title {
+    text-align: justify;
+    padding-bottom: 14px;
+}
+
+.page-title h2 {
+    color: #10b981;
+}
+
+.form-group {
+    padding-bottom: 14px;
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.input-container {
+    min-width: 49%;
+    flex-grow: 1;
+}
+
+.input-container-sm {
+    min-width: 24%;
+    flex-grow: 1;
+}
+
+.danger {
+    color: red;
+}
+
+.phone-container ::ng-deep .p-floatlabel {
+    width: 100%;
+}
+
+label {
+    font-size: 16px!important;
+}
+
+.phone-key {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    direction: ltr;
+    background-color: #8D5C4C !important;
+    border: 1px solid #8D5C4C !important;
+    color: #fff !important;
+}
+
+
+#phone {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+
+.w-100 {
+    width: 100%;
+}
+
+.submit-container {
+    width: max-content;
+    margin: 7px auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-area {
+    padding: 21px 14px;
+    height: 77px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1.25rem;
+}
+
+textarea:focus{
+    border: transparent;
+    outline: 1px solid #10b981;
+}
+
+::ng-deep.p-button {
+    width: 220px;
+}

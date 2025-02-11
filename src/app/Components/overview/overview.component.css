@@ -1,3 +1,8 @@
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'pnu', sans-serif;
+}
 .overview {
     display: flex;
     justify-content: space-between;
@@ -30,21 +35,21 @@
 
 .card i{
     font-size: 3rem;
-    color: #617b7b;
-    border: 4px double #617b7b;
+    color: #000;
+    border: 4px double #000;
     border-radius: 50%;
     padding: 14px;
     margin: 2px;
 }
 
 .card-special, .card:hover {
-    background-color: #617b7b;
-    color: #fff;
+    background-color: beige;
+    color: #000;
 }
 
 .card-special i, .card:hover i {
-    color: #fff;
-    border-color: #fff;
+    color: #000;
+    border-color: #000;
 }
 
 .card .title {

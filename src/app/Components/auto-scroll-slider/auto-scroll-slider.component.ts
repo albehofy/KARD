@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HomeService } from '../../Services/home.service';
 
 @Component({
   selector: 'app-auto-scroll-slider',
@@ -9,10 +10,25 @@ import { CommonModule } from '@angular/common';
 })
 export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy {
   currentImageIndex: number = 0;
-  images: string[] = ['assets/images/slider/1.png', 'assets/images/slider/2.png','assets/images/slider/3.png'];
+  images: string[] = [];
   intervalValue: any;
   isAutoScrollPaused: boolean = false;  // New flag to track pause status
 
+   constructor(private homeService: HomeService) {
+      this.homeService.getImages('slider image for home page').subscribe({
+          next: data => {
+            data.map((item: any) => {
+              this.images.push(item.photo);
+              console.log(this.images)
+
+            })
+          },
+          error: error => {
+            console.error('There was an error!', error);
+          }
+        })
+   }
+   
   ngAfterViewInit() {
     console.log('Auto scroll slider component initialized');
     if (this.images.length > 0) {

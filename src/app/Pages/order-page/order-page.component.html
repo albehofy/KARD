@@ -1,0 +1,60 @@
+<app-auto-scroll-slider/>
+<section class="py-5 my-5">
+    <div class="data-holder">
+        <div class="container-size">
+            <h3 class="text-center logo">سجل رقمك وخياطنا بيجيك  في مكانك</h3>
+            <!-- <div class="page-title">
+            </div> -->
+            <div class="form-group">
+                <div class="input-container">
+                    <p-floatlabel variant="on">
+                        <p-select [options]="types" id="requestTypes" [(ngModel)]="order.order_Serv"
+                            optionLabel="name" class="w-100" />
+                        <label for="requestTypes">نوع الطلب: </label>
+                    </p-floatlabel>
+                </div>           
+            </div>
+            <div class="form-group">
+                <div class="input-container">
+                    <p-floatlabel variant="on">
+                        <p-select [options]="cites" id="requestTypes" [(ngModel)]="order.client_City"
+                            optionLabel="name" class="w-100" />
+                        <label for="requestTypes"> المدينة: </label>
+                    </p-floatlabel>
+                </div>           
+            </div>
+            <div class="form-group">
+                <div class="input-container">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="company" [(ngModel)]="order.district" maxlength="20" class="w-100" autocomplete="off" required
+                            />
+                        <label for="name">الحي</label>
+                    </p-floatlabel>
+                    <!-- Validation messages -->
+                    <!-- @if(name.empty) {
+                    <small class="danger">يجب ادخال اسم الشركة</small>
+                    }@else if(name.invalid) {
+                    <small class="danger">{{name.errorMessage}}</small>
+                    } -->
+                </div>       
+            </div>
+    
+            <div class="form-group">
+                <div class="input-container phone-container flex">
+                    <p-floatlabel variant="on">
+                        <input pInputText id="phone" [(ngModel)]="order.client_Num" class="w-100" autocomplete="off" required
+                            (change)="checkValidation(phone)" />
+                        <label for="phone">الجوال</label>
+                    </p-floatlabel>
+                    <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" />
+                </div>
+            </div>
+    
+    
+            <div class="submit-container">
+                <p-button (click)="addRequest()" label="إرسال الطلب" />
+            </div>
+    
+        </div>
+    </div>
+</section>

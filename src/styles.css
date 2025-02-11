@@ -14,7 +14,7 @@
 }
 html, body{
     direction: rtl;
-    background-color: #f7fff4;
+    background-color: beige;
 }
 .container {
     font-family: 'pnu', sans-serif;
@@ -38,6 +38,16 @@ html, body{
 .py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.py-6{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem; 
+}
+
+.my-5{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem; 
 }
 
 .ltr {

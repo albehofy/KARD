@@ -11,19 +11,6 @@
     background-size: 30px 30px;    
 }
 
-/* .Shapes_dots__bottom {
-    position: absolute;
-    bottom: 250px;
-    right: 0;
-    width: 300px;
-    height: 400px;
-    z-index: 0;
-background-color: initial;
-background-image: radial-gradient( #5ec0d4 2px, hsla(0, 0%, 100%, 0) 0);
-background-size: 18px 18px;
-transform: translateY(50%);
-} */
-
 
 h1 {
     width: max-content;
@@ -32,7 +19,7 @@ h1 {
     font-family: 'pnu', sans-serif;
     font-size: 1.5em;
     color: #315e5e;
-    background-color: #f7fff4;
+    background-color: beige;
 }
 
 .container-size {

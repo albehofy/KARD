@@ -13,8 +13,9 @@ import { ReturnOrEditProductComponent } from './Pages/return-or-edit-product/ret
 import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.component';
 import { TaxCertificateComponent } from './Pages/tax-certificate/tax-certificate.component';
 import { ECommerceAuthenticationCertificateComponent } from './Pages/e-commerce-authentication-certificate/e-commerce-authentication-certificate.component';
+import { OrderPageComponent } from './Pages/order-page/order-page.component';
 export const routes: Routes = [
-    {path: '',component: HomeComponent},
+    { path: '', component: HomeComponent },
     { path: 'about', component: AboutComponent },
     { path: 'careers', component: CareersComponent },
     { path: 'contact', component: ContactComponent },
@@ -22,10 +23,11 @@ export const routes: Routes = [
     { path: 'feedback', component: FeedbackComponent },
     { path: 'commonQuestions/:id', component: QuestionComponent },
     { path: 'commonQuestions', component: CommonQuestionsComponent },
-    { path:'terms-and-payments',component:PaymentsMethodsAndTermsComponent},
-    { path:'return-edit-policy',component:ReturnOrEditProductComponent},
-    { path:'privacy-policy',component: PrivacyPolicyComponent},
-    { path:'tax-certificate',component: TaxCertificateComponent},
-    { path:'e-commerce-authentication',component: ECommerceAuthenticationCertificateComponent},
+    { path: 'terms-and-payments', component: PaymentsMethodsAndTermsComponent },
+    { path: 'return-edit-policy', component: ReturnOrEditProductComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
+    { path: 'tax-certificate', component: TaxCertificateComponent },
+    { path: 'e-commerce-authentication', component: ECommerceAuthenticationCertificateComponent },
+    { path: 'offer', component: OrderPageComponent },
     { path: '**', component: PageNotFoundComponent }
 ];

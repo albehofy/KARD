@@ -1,5 +1,10 @@
+@if(isloaded){
+
 <app-navbar/>
 <div class="layout">
     <router-outlet/>
 </div>
 <app-footer/>
+}@else {
+    <app-loader/>
+}
