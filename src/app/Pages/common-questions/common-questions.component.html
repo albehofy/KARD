@@ -22,7 +22,7 @@
                  <p-accordion value="0" [multiple]="true">
                      @for (question of questions; track $index) {
                          <p-accordion-panel [value]="$index + 1">
-                             <p-accordion-header>{{question.header}}</p-accordion-header>
+                             <p-accordion-header>{{question.title}}</p-accordion-header>
                              <p-accordion-content>
                                  <p class="m-0">
                                      {{question.content}}

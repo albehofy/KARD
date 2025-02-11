@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+
+export interface Feedback {
+  fullName: string;
+  city: string;
+  district: string;
+  phoneNumber: string;
+  requestType: string;
+  complaintDescription: string;
+  note: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
+  private apiUrl = environment.API + 'api/Complaints'; // Replace with your API endpoint
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getImages(data: string): Observable<any> {
-    return this.http.post(environment.API + 'api/', data);
-  }}
+  submitFeedback(feedback: Feedback): Observable<any> {
+    return this.http.post(this.apiUrl, feedback);
+  }
+}

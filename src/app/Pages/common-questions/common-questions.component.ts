@@ -5,6 +5,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CommonQuestionsService } from '../../Services/common-questions.service';
 // import { Header } from 'primeng/api';
 @Component({
     selector: 'app-common-questions',
@@ -13,12 +14,6 @@ import { InputTextModule } from 'primeng/inputtext';
     styleUrl: './common-questions.component.css'
 })
 export class CommonQuestionsComponent {
-    dt2: any;
-    dt1: any;
-    clear(arg0: any) {
-        throw new Error('Method not implemented.');
-    }
-
     commonQuestions: any[] = [
         {
             header: 'ماهو الهدف من موقع الويب هذا؟',
@@ -49,6 +44,25 @@ export class CommonQuestionsComponent {
             content: 'نعم، من خلال خدمات الاستشارة عبر الإنترنت يمكنك حجز جلسة مع أحد الخبراء.'
         }
     ]
+    constructor(private commonQuestionsService: CommonQuestionsService) { }
+    ngOnInit() {
+        this.commonQuestions = [];
+    
+        this.questions = this.commonQuestions; // Initially, display all questions
+        
+        this.commonQuestionsService.getCommonQuestions().subscribe((data) => {
+          this.commonQuestions = data;
+        this.questions = this.commonQuestions; // Initially, display all questions
+    
+        });
+      }
+    dt2: any;
+    dt1: any;
+    clear(arg0: any) {
+        throw new Error('Method not implemented.');
+    }
+
+ 
 
     questions: any[] = this.commonQuestions;
     

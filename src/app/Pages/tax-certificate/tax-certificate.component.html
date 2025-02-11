@@ -1,7 +1,10 @@
 <div class="tax-certificate data-holder">
     <h1>الشهادة الضريبية</h1>
     <div class="flex">
-        <img src="assets/images/certificate1.png" class="certificate" alt="certificate">
-        <img src="assets/images/certificate2.png" class="certificate" alt="certificate">
+        @for (img of taxCertificate; track $index) {
+            <img [src]="img.photo" class="certificate" alt="certificate">
+
+        }
+        <!-- <img src="assets/images/certificate2.png" class="certificate" alt="certificate"> -->
     </div>
 </div>

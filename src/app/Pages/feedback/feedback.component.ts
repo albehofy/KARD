@@ -12,7 +12,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-
+import { FeedbackService, Feedback } from '../../Services/feedback.service';
 interface Select {
     name: string;
     code: number;
@@ -22,18 +22,25 @@ interface UploadEvent {
     originalEvent: Event;
     files: File[];
 }
+
 @Component({
     selector: 'app-feedback',
     imports: [CommonModule,ButtonModule,SelectModule,ToastModule,FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink],
     templateUrl: './feedback.component.html',
     styleUrl: './feedback.component.css',
     providers: [MessageService]
-
 })
 export class FeedbackComponent implements OnInit {
     items: MenuItem[] | undefined;
     name = {
         pattern: "^[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}",
+        value: "",
+        invalid: false,
+        empty: false,
+        errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
+    }
+    district = {
+        pattern: "^[\u0621-\u064A]{2,}\\s]",
         value: "",
         invalid: false,
         empty: false,
@@ -89,7 +96,6 @@ export class FeedbackComponent implements OnInit {
             code: 2
         }
     ];
-
     selectedGender = this.gender[0];
     selectedCity = this.cities[0];
     selectedRequestType = this.requestTypes[0];
@@ -97,7 +103,7 @@ export class FeedbackComponent implements OnInit {
     phone = '';
     home: MenuItem | undefined;
 
-    constructor(private messageService: MessageService) {
+    constructor(private messageService: MessageService, private feedbackService: FeedbackService) {
     }
     
     onBasicUploadAuto(event: UploadEvent | any) {
@@ -131,8 +137,24 @@ export class FeedbackComponent implements OnInit {
         }
     }
 
-
     addFeedback() {
-        
+        const feedback: Feedback = {
+            fullName: this.name.value,
+            city: this.selectedCity.name,
+            district: this.district.value, // You need to bind this to a form control
+            phoneNumber: this.phone,
+            requestType: this.selectedRequestType.name,
+            complaintDescription: this.notes.value, // You need to bind this to a form control
+            note: "Notes"
+        };
+
+        this.feedbackService.submitFeedback(feedback).subscribe({
+            next: (response) => {
+                this.messageService.add({ severity: 'success', summary: 'تم الإرسال', detail: 'تم إرسال الشكوى بنجاح' });
+            },
+            error: (error) => {
+                this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل إرسال الشكوى' });
+            }
+        });
     }
 }

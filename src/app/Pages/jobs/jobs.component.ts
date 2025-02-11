@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FloatLabelModule } from "primeng/floatlabel"
+import { FloatLabelModule } from "primeng/floatlabel";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { EmployingService, EmployingData } from '../../Services/employing-data.service';
 
 interface SelectInterface {
     name: string;
@@ -22,13 +23,14 @@ interface UploadEvent {
     originalEvent: Event;
     files: File[];
 }
+
 @Component({
     selector: 'app-jobs',
     imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink],
     templateUrl: './jobs.component.html',
     styleUrl: './jobs.component.css',
     standalone: true,
-    providers: [MessageService]
+    providers: [MessageService, EmployingService] // Add EmployingService to providers
 })
 export class JobsComponent implements OnInit {
     items: MenuItem[] | undefined;
@@ -38,7 +40,7 @@ export class JobsComponent implements OnInit {
         invalid: false,
         empty: false,
         errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
-    }
+    };
     gender: SelectInterface[] = [
         {
             name: "ذكر",
@@ -127,44 +129,84 @@ export class JobsComponent implements OnInit {
     selectedJob = this.jobs[0];
     selectedEducation = this.educations[0];
     selectedExperincesYears = this.experincesYears[0];
-    age: any;
-
+    age!: number;
     phone = '';
+    cvFile: File | null = null; // To store the uploaded CV file
     home: MenuItem | undefined;
 
-    constructor(private messageService: MessageService) {
-    }
+    constructor(
+        private messageService: MessageService,
+        private employingService: EmployingService // Inject EmployingService
+    ) {}
 
-    onBasicUploadAuto(event: UploadEvent | any) {
+    onBasicUploadAuto(event: any) {
+        this.cvFile = event.files[0]; // Store the uploaded file
         this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
-        console.log(event.files);
     }
 
     ngOnInit() {
         this.items = [
             { label: 'التوظيف', icon: 'pi pi-people', routerLink: '/jobs' },
         ];
-
         this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
 
     checkValidation(item: any) {
-        // The regex pattern for 3 Arabic words
         const reg = new RegExp(item.pattern);
-
-        // Trim input to remove any unwanted spaces before and after
         const inputValue = item.value.trim();
-
-        // Check if the value is empty
         if (inputValue === "" || inputValue === null) {
             item.empty = true;
-        } else if (reg.test(inputValue)) {  // Check if it matches the regex
+        } else if (reg.test(inputValue)) {
             item.invalid = false;
         } else {
-            console.log(reg.test(inputValue));  // Log result of the regex test
             item.invalid = true;
         }
     }
 
+    onSubmit() {
+        // Validate the form
+        this.checkValidation(this.name);
 
+        if (this.name.invalid || this.name.empty) {
+            this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إدخال اسم صحيح' });
+            return;
+        }
+
+        if (this.age < 18 || this.age > 99) {
+            this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'العمر يجب أن يكون بين 18 و 99 سنة' });
+            return;
+        }
+
+        if (!this.phone || this.phone.length < 10) {
+            this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إدخال رقم جوال صحيح' });
+            return;
+        }
+
+        // Prepare the data for submission
+        const employingData: EmployingData = {
+            FullName: this.name.value,
+            Age: this.age,
+            Gender: this.selectedGender.code === 1, // Convert to boolean
+            PhoneNumber: this.phone,
+            City: this.selectedCity.name,
+            Nationality: this.selectedNationality.name,
+            JobTitle: this.selectedJob.name,
+            EducationLevel: this.selectedEducation.name,
+            ExperienceYears: this.selectedExperincesYears.code,
+            CvFile: this.cvFile!, // Use the uploaded file
+            Note: '' // Add a note field if needed
+        };
+
+        // Submit the data
+        this.employingService.submitEmployingData(employingData).subscribe(
+            (response) => {
+                this.messageService.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال الطلب بنجاح' });
+                console.log('Submission successful:', response);
+            },
+            (error) => {
+                this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل إرسال الطلب' });
+                console.error('Submission failed:', error);
+            }
+        );
+    }
 }

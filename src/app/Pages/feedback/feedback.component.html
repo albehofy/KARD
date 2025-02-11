@@ -34,7 +34,6 @@
             </div>
         </div>
 
-
         <div class="form-group">
             <div class="input-container">
                 <p-floatlabel variant="on">
@@ -45,27 +44,18 @@
             </div>
             <div class="input-container">
                 <p-floatlabel variant="on">
-                    <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
-                        (change)="checkValidation(name)" />
-                    <label for="name">الحي: </label>
+                    <input pInputText id="district" [(ngModel)]="district.value" class="w-100" autocomplete="off" required
+                        (change)="checkValidation(district)" />
+                    <label for="district">الحي: </label>
                 </p-floatlabel>
                 <!-- Validation messages -->
-                @if(name.empty) {
-                <small class="danger">يجب ادخال الاسم</small>
-                }@else if(name.invalid) {
-                <small class="danger">{{name.errorMessage}}</small>
+                @if(district.empty) {
+                <small class="danger">يجب ادخال الحي</small>
                 }
             </div>
         </div>
 
         <div class="form-group">
-            <!-- <div class="input-container">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="gender"
-                        placeholder="Select request type" class="w-100" />
-                    <label for="gender">نوع الطلب: </label>
-                </p-floatlabel>
-            </div> -->
             <div class="input-container">
                 <p-floatlabel variant="on">
                     <p-select [options]="requestTypes" id="requestTypes" [(ngModel)]="selectedRequestType"
@@ -88,40 +78,14 @@
             <div class="input-container">
                 <label for="notes">اضافة ملاحظات: </label>
                 <textarea pTextarea id="notes" class="w-100 text-area" style="resize: none" [(ngModel)]="notes.value"
-                    autocomplete="off" required (change)="checkValidation(name)"></textarea>
+                    autocomplete="off" required (change)="checkValidation(notes)"></textarea>
             </div>
         </div>
-        <!-- 
-        <div class="form-group">
-            <div class="input-container-sm">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
-            </div>
 
-            <div class="input-container-sm">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container-sm">
-                <p-floatlabel variant="on">
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name"
-                        placeholder="Select a gender" class="w-100" />
-                    <label for="names">النوع</label>
-                </p-floatlabel>
-            </div>
-        </div> -->
         <p class="text-blue">*جميع الشكاوى تخضع لرقابة مباشرة من الإدارة العامة</p>
 
-
         <div class="submit-container">
-            <p-button label="إرسال الطلب" />
+            <p-button label="إرسال الطلب" (onClick)="addFeedback()" />
         </div>
-
     </div>
 </div>
