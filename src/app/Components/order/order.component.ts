@@ -10,6 +10,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { OrderService } from '../../Services/add-order.service';
+import { CarrersService } from '../../Services/carrers.service';
 
 interface Gender {
     name: string;
@@ -21,84 +23,64 @@ interface UploadEvent {
     files: File[];
 }
 @Component({
-  selector: 'app-order',
-  imports: [CommonModule,ButtonModule,SelectModule,ToastModule,FileUploadModule, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule],
-  templateUrl: './order.component.html',
-  styleUrl: './order.component.css',
-  providers: [MessageService]
+    selector: 'app-order',
+    imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule],
+    templateUrl: './order.component.html',
+    styleUrl: './order.component.css',
+    providers: [MessageService]
 
 })
 export class OrderComponent {
-  items: MenuItem[] | undefined;
-  name = {
-      pattern: "^[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}",
-      value: "",
-      invalid: false,
-      empty: false,
-      errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
-  }
-  comapny = {
-      pattern: "^[\u0621-\u064A]{2,}",
-      value: "",
-      invalid: false,
-      empty: false,
-      errorMessage: "الرجاء إدخال اسم الشركة باللغة العربية"
-  }
-  notes = {
-      pattern: "^[\u0621-\u064A]{2,}",
-      value: "",
-      invalid: false,
-      empty: false,
-      errorMessage: "الرجاء إدخال اسم الشركة باللغة العربية"
-  }
-  gender: Gender[] = [
-      {
-          name: "ذكر",
-          code: 1
-      },
-      {
-          name: "انثى",
-          code: 2
+    items: MenuItem[] | undefined;
+
+    home: MenuItem | undefined;
+    allOffers: any[] = [];
+        name: string = '';
+        companyName: string = '';
+        mobileNumber: string = '';
+        note: string = '';
+    constructor(private messageService: MessageService, private order: OrderService, private carrersService: CarrersService) {
+        this.order.getAllOffers().subscribe({
+            next: (response) => {
+                response.forEach((element: any) => {
+                    if (element.price != null) {
+                        this.allOffers.push(element);
+                    }
+                });
+                console.log(this.allOffers);
+            },
+            error: (error) => {
+            }
+        });
+    }
+    onBasicUploadAuto(event: UploadEvent | any) {
+        this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
+        console.log(event.files);
+    }
+
+    ngOnInit() {
+        this.items = [
+            { label: 'الشكاوى والاستفسارات', icon: 'pi pi-people', routerLink: '/feedback' },
+        ];
+
+        this.home = { icon: 'pi pi-home', routerLink: '/' };
+    }
+
+    addOrder() {
+        this.carrersService.createOrder({
+          name:this.name,
+          Company_name:this.companyName, 
+          mobileNumber: this.mobileNumber,
+          note: this.note
+        }).subscribe({
+          next: data => {
+            console.log(data);
+            alert('تم الارسال بنجاح');
+          },
+          error: error => {
+            console.error('There was an error!', error);
+          }
+        })  
       }
-  ];
-  selectedGender = this.gender[0];
-  age:any;
 
-  phone = '';
-  home: MenuItem | undefined;
-
-  constructor(private messageService: MessageService) {
-  }
-  
-  onBasicUploadAuto(event: UploadEvent | any) {
-      this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
-      console.log(event.files);
-  }
-
-  ngOnInit() {
-      this.items = [
-          { label: 'الشكاوى والاستفسارات', icon: 'pi pi-people', routerLink: '/feedback' },
-      ];
-
-      this.home = { icon: 'pi pi-home', routerLink: '/' };
-  }
-
-  checkValidation(item: any) {
-      // The regex pattern for 3 Arabic words
-      const reg = new RegExp(item.pattern);
-  
-      // Trim input to remove any unwanted spaces before and after
-      const inputValue = item.value.trim();
-      
-      // Check if the value is empty
-      if (inputValue === "" || inputValue === null) {
-          item.empty = true;
-      } else if (reg.test(inputValue)) {  // Check if it matches the regex
-          item.invalid = false;
-      } else {
-          console.log(reg.test(inputValue));  // Log result of the regex test
-          item.invalid = true;
-      }
-  }
-  
 }

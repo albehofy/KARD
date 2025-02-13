@@ -1,16 +1,19 @@
-<h2 class="header"><img src="assets/images/kard.png" alt=""></h2>
-<h3 class="title">{{logos[0]}}</h3>
-<div class="add-holder">
-    <img src="assets/images/video.png" alt="">
-    <div class="overlay">
-        <h2>{{logos[1]}}</h2>
-        <h2>{{logos[2]}}</h2>
-        <i class="fa-solid fa-play video-icon" (click)="openVideo()"></i>
+@if (videoUrl) {
+    <h2 class="header"><img src="assets/images/kard.png" alt=""></h2>
+    <h3 class="title">{{logos[0]}}</h3>
+    <div class="add-holder">
+        <img src="assets/images/video.png" alt="">
+        <div class="overlay">
+            <h2>{{logos[1]}}</h2>
+            <h2>{{logos[2]}}</h2>
+            <i class="fa-solid fa-play video-icon" (click)="openVideo()"></i>
+        </div>
     </div>
-</div>
-<div [ngClass]="{'fixed':isVideoOpened}" *ngIf="isVideoOpened">
-    <i class="fa-solid fa-xmark close-icon" (click)="closeVideo()"></i>
-    <iframe [src]="videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <!-- <iframe [src]="logos[3]" width="100%" height="600px" frameborder="0"></iframe> -->
-
-</div>
+    
+    <div [ngClass]="{'fixed':isVideoOpened}" *ngIf="isVideoOpened">
+        <i class="fa-solid fa-xmark close-icon" (click)="closeVideo()"></i>
+        <iframe [src]="videoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- <iframe [src]="logos[3]" width="100%" height="600px" frameborder="0"></iframe> -->
+    
+    </div>
+}

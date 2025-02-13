@@ -37,6 +37,7 @@ export class ContactComponent {
             {
                 next: (data) => {
                     this.contact.whatsapp = data.whatsapp;
+                    console.log(data)
                 },
                 error: (error) => {
                     console.log(error)

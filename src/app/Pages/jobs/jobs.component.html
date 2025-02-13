@@ -1,101 +1,87 @@
-<div class="data-holder">
-    <div class="Shapes_dots__1jMPc"></div>
-    <div class="Shapes_dots__bottom"></div>
-    <div class="container-size">
-        <p-breadcrumb class="max-w-full page-header" [model]="items" [home]="home">
-            <ng-template #item let-item>
-                <a class="cursor-pointer" [routerLink]="item.routerLink">
-                    {{item.label}}
-                    <i [class]="item.icon"></i>
-                </a>
-            </ng-template>
-            <ng-template #separator> / </ng-template>
-        </p-breadcrumb>
-
-        <div class="page-title">
-            <h2>طلب جديد - تسجيل بيانات طلب توظيف</h2>
-            <p>املأ النموذج أدناه لإرسال طلب الحصول على وظيفة بشركتنا</p>
-        </div>
-
-        <div class="form-group">
-            <div class="input-container">
-                <p-floatlabel>
-                    <input pInputText id="name" [(ngModel)]="name.value" class="w-100" required (change)="checkValidation(name)" />
+@if(isJobsOpend){
+    <div class="data-holder">
+        <div class="Shapes_dots__1jMPc"></div>
+        <div class="Shapes_dots__bottom"></div>
+        <div class="container-size">
+            <p-breadcrumb class="max-w-full page-header" [model]="items" [home]="home">
+                <ng-template #item let-item>
+                    <a class="cursor-pointer" [routerLink]="item.routerLink">
+                        {{item.label}}
+                        <i [class]="item.icon"></i>
+                    </a>
+                </ng-template>
+                <ng-template #separator> / </ng-template>
+            </p-breadcrumb>
+    
+            <div class="page-title">
+                <h2>طلب جديد - تسجيل بيانات طلب توظيف</h2>
+                <p>املأ النموذج أدناه لإرسال طلب الحصول على وظيفة بشركتنا</p>
+            </div>
+    
+            <div class="form-group">
+                <div class="input-container">
+                    
                     <label for="name">الإسم ثلاثي</label>
-                </p-floatlabel>
-                <small class="danger" *ngIf="name.empty">يجب ادخال الاسم</small>
-                <small class="danger" *ngIf="name.invalid">{{name.errorMessage}}</small>
-            </div>
-            <div class="input-container">
-                <p-floatlabel>
-                    <p-inputnumber inputId="integeronly" class="w-100" [(ngModel)]="age" />
+                        <input pInputText id="name" [(ngModel)]="name.value" class="w-100" required (change)="checkValidation(name)" />
+                    <small class="danger" *ngIf="name.empty">يجب ادخال الاسم</small>
+                    <small class="danger" *ngIf="name.invalid">{{name.errorMessage}}</small>
+                </div>
+                <div class="input-container">
                     <label for="age">العمر</label>
-                </p-floatlabel>
-                <small class="danger" *ngIf="age > 99 || age < 18">يجب أن يكون العمر بين 18 و 99</small>
+                    <p-inputnumber inputId="integeronly" class="w-100" [(ngModel)]="age" />
+                    <!-- <small class="danger" *ngIf="age > 99 || age < 18">يجب أن يكون العمر بين 18 و 99</small> -->
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-container">
-                <p-floatlabel>
-                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name" class="w-100" />
+    
+            <div class="form-group">
+                <div class="input-container">
                     <label for="gender">الجنس</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container phone-container flex">
-                <p-floatlabel>
-                    <input pInputText id="phone" [(ngModel)]="phone" class="w-100" required />
+                    <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name" class="w-100" />
+                </div>
+                <div class="input-container">
                     <label for="phone">الجوال</label>
-                </p-floatlabel>
-                <input pInputText value="+966" disabled class="phone-key" />
+                        <input pInputText id="phone" placeholder="0512312312" min="10" max="10" [(ngModel)]="phone" class="w-100" required />
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-container">
-                <p-floatlabel>
-                    <p-select [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" class="w-100" />
+    
+            <div class="form-group">
+                <div class="input-container">
                     <label for="city">المدينة</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container">
-                <p-floatlabel>
-                    <p-select [options]="nationalities" [(ngModel)]="selectedNationality" optionLabel="name" class="w-100" />
+                    <p-select [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" class="w-100" />
+                </div>
+                <div class="input-container">
                     <label for="nationality">الجنسية</label>
-                </p-floatlabel>
+                        <p-select [options]="nationalities" [(ngModel)]="selectedNationality" optionLabel="name" class="w-100" />
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-container-sm">
-                <p-floatlabel>
-                    <p-select [options]="jobs" [(ngModel)]="selectedJob" optionLabel="name" class="w-100" />
+    
+            <div class="form-group">
+                <div class="input-container-sm">
                     <label for="job">الوظيفة</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container-sm">
-                <p-floatlabel>
-                    <p-select [options]="educations" [(ngModel)]="selectedEducation" optionLabel="name" class="w-100" />
+                        <p-select [options]="jobs" [(ngModel)]="selectedJob" optionLabel="name" class="w-100" />
+                </div>
+                <div class="input-container-sm">
                     <label for="education">المرحلة التعليمية</label>
-                </p-floatlabel>
-            </div>
-            <div class="input-container-sm">
-                <p-floatlabel>
-                    <p-select [options]="experincesYears" [(ngModel)]="selectedExperincesYears" optionLabel="name" class="w-100" />
+                        <p-select [options]="educations" [(ngModel)]="selectedEducation" optionLabel="name" class="w-100" />
+                </div>
+                <div class="input-container-sm">
                     <label for="experience">عدد سنوات الخبرة</label>
-                </p-floatlabel>
+                        <p-select [options]="experincesYears" [(ngModel)]="selectedExperincesYears" optionLabel="name" class="w-100" />
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="input-container files-container">
-                <p-fileupload mode="basic" class="w-100" name="cv" chooseIcon="pi pi-upload" accept=".pdf,.docx,image/*"
-                    maxFileSize="1000000" (onSelect)="onBasicUploadAuto($event)" chooseLabel="يرجى إرفاق السيرة الذاتية (اختياري)" />
+    
+            <div class="form-group">
+                <div class="input-container files-container">
+                    <p-fileupload mode="basic" class="w-100" name="cv" chooseIcon="pi pi-upload" accept=".pdf,.docx,image/*"
+                        maxFileSize="1000000" (onSelect)="onBasicUploadAuto($event)" chooseLabel="يرجى إرفاق السيرة الذاتية (اختياري)" />
+                </div>
             </div>
-        </div>
-
-        <div class="submit-container">
-            <p-button label="إرسال الطلب" (onClick)="onSubmit()" />
+    
+            <div class="submit-container">
+                <p-button label="إرسال الطلب" (click)="onSubmit()" />
+            </div>
         </div>
     </div>
-</div>
+
+
+}

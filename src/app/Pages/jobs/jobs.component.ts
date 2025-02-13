@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { EmployingService, EmployingData } from '../../Services/employing-data.service';
+import { event } from 'jquery';
 
 interface SelectInterface {
     name: string;
@@ -34,6 +35,7 @@ interface UploadEvent {
 })
 export class JobsComponent implements OnInit {
     items: MenuItem[] | undefined;
+    jobsStatus:boolean = false;
     name = {
         pattern: "^[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}",
         value: "",
@@ -114,7 +116,7 @@ export class JobsComponent implements OnInit {
         { name: "بكالريوس", code: 3 },
         { name: "ماجستير", code: 4 },
         { name: "دكتوراة", code: 5 }
-        
+
     ]
     experincesYears: SelectInterface[] = [
         { name: "أقل من سنة", code: 1 },
@@ -134,10 +136,18 @@ export class JobsComponent implements OnInit {
     cvFile: File | null = null; // To store the uploaded CV file
     home: MenuItem | undefined;
 
-    constructor(
-        private messageService: MessageService,
-        private employingService: EmployingService // Inject EmployingService
-    ) {}
+    isJobsOpend:any;
+    
+    constructor(private messageService: MessageService,private employingService: EmployingService ) {
+        this.employingService.togglingJops().subscribe({
+            next: (response) => {
+                this.isJobsOpend = response;
+            },
+            error: (error) => {
+                alert('حدث خطأ ما');
+            }
+        })
+    }
 
     onBasicUploadAuto(event: any) {
         this.cvFile = event.files[0]; // Store the uploaded file
@@ -181,7 +191,6 @@ export class JobsComponent implements OnInit {
             this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إدخال رقم جوال صحيح' });
             return;
         }
-
         // Prepare the data for submission
         const employingData: EmployingData = {
             FullName: this.name.value,
@@ -197,15 +206,22 @@ export class JobsComponent implements OnInit {
             Note: '' // Add a note field if needed
         };
 
+        alert("test")
         // Submit the data
         this.employingService.submitEmployingData(employingData).subscribe(
-            (response) => {
-                this.messageService.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال الطلب بنجاح' });
-                console.log('Submission successful:', response);
-            },
-            (error) => {
-                this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل إرسال الطلب' });
-                console.error('Submission failed:', error);
+            {
+                next: (response) => {
+                    this.messageService.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال الطلب بنجاح' });
+                    alert('تم الارسال بنجاح');
+
+                    console.log('Submission successful:', response);
+                },
+                error: (error) => {
+                    this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ أثناء إرسال الطلب' });
+                    alert('فشل الارسال');
+
+                    console.error('Submission error:', error);
+                }
             }
         );
     }

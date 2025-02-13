@@ -15,6 +15,10 @@ export class OrderService {
   createOrder(orderData: OrderRequest): Observable<any> {
     return this.http.post<any>(this.environment + 'api/Order' , orderData);
   }
+
+  getAllOffers(): Observable<any> {
+    return this.http.get(this.environment + 'api/Images/GetAllImagesWithOffers',{headers: {'Content-Type': 'application/json'}});
+  }
 }
 
 export interface OrderRequest {

@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FeedbackService, Feedback } from '../../Services/feedback.service';
+import { RippleModule } from 'primeng/ripple';
 interface Select {
     name: string;
     code: number;
@@ -25,7 +26,7 @@ interface UploadEvent {
 
 @Component({
     selector: 'app-feedback',
-    imports: [CommonModule,ButtonModule,SelectModule,ToastModule,FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink],
+    imports: [CommonModule,ButtonModule,SelectModule,ToastModule,FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink,RippleModule],
     templateUrl: './feedback.component.html',
     styleUrl: './feedback.component.css',
     providers: [MessageService]
@@ -92,7 +93,7 @@ export class FeedbackComponent implements OnInit {
             code: 1
         },
         {
-            name: "شكوى",
+            name: "الاقتراحات والشكاوى",
             code: 2
         }
     ];
@@ -150,11 +151,17 @@ export class FeedbackComponent implements OnInit {
 
         this.feedbackService.submitFeedback(feedback).subscribe({
             next: (response) => {
+                this.show();
+                alert('تم الارسال بنجاح');
                 this.messageService.add({ severity: 'success', summary: 'تم الإرسال', detail: 'تم إرسال الشكوى بنجاح' });
             },
             error: (error) => {
+                alert('فشل الارسال');
                 this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل إرسال الشكوى' });
             }
         });
+    }
+    show() {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
     }
 }

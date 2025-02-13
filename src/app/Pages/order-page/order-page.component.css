@@ -16,6 +16,10 @@
     margin-bottom: 27px;
 }
 
+label {
+    font-size: 18px;
+    font-weight: 600;
+}
 
 ::ng-deep p-breadcrumb nav {
     margin-bottom: 14px;

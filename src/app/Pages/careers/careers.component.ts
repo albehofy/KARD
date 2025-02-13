@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OrderComponent } from "../../Components/order/order.component";
 import { AddTextService } from '../../Services/add-text.service';
+import { CarrersService } from '../../Services/carrers.service';
 // import { BackgoundPatternComponent } from "../../Components/backgound-pattern/backgound-pattern.component";
 
 @Component({
@@ -11,7 +12,8 @@ import { AddTextService } from '../../Services/add-text.service';
 })
 export class CareersComponent {
     worksDepartment: string = '';
-    constructor(private addTextServices: AddTextService) { 
+
+    constructor(private addTextServices: AddTextService, private companyOrder: CarrersService) { 
         this.addTextServices.getParagraphs('worksDepartment').subscribe({
           next: data => {
             console.log(data);
@@ -23,4 +25,6 @@ export class CareersComponent {
         })
 
       }
+
+
 }

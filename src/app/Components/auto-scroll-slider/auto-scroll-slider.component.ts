@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeService } from '../../Services/home.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-auto-scroll-slider',
@@ -8,27 +9,17 @@ import { HomeService } from '../../Services/home.service';
   styleUrls: ['./auto-scroll-slider.component.css'],
   imports: [CommonModule]
 })
-export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy {
+export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnInit {
   currentImageIndex: number = 0;
-  images: string[] = [];
+  images: string[] = ['https://placehold.co/1400x700',];
   intervalValue: any;
   isAutoScrollPaused: boolean = false;  // New flag to track pause status
 
-   constructor(private homeService: HomeService) {
-      this.homeService.getImages('slider image for home page').subscribe({
-          next: data => {
-            data.map((item: any) => {
-              this.images.push(item.photo);
-              console.log(this.images)
-
-            })
-          },
-          error: error => {
-            console.error('There was an error!', error);
-          }
-        })
-   }
-   
+  
+  constructor(private homeService: HomeService) {
+    
+  }
+  
   ngAfterViewInit() {
     console.log('Auto scroll slider component initialized');
     if (this.images.length > 0) {
@@ -85,5 +76,19 @@ export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy {
     if (!this.isAutoScrollPaused) {
       this.startAutoScroll();
     }
+  }
+
+  ngOnInit(): void {
+    this.homeService.getImages('slider image for home page').subscribe({
+      next: data => {
+        this.images = [];
+        data.map((item: any) => {
+          this.images.push(item.photo);
+        })
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
   }
 }

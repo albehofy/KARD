@@ -8,7 +8,7 @@
     margin: 0;
     display: flex;
     justify-content: space-around;
-    background-color: #315e5e;
+    background-color: #000;
     overflow: hidden;
     font-family: "pnu", sans-serif;
     z-index: 99999;
@@ -18,7 +18,7 @@
     width: 102px;
     margin-top: -29px;
     cursor: pointer;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     border-radius: 50%;
 }
 
@@ -88,6 +88,7 @@
     }
 
 @media only screen and (max-width: 971px) {
+    
     .navbar {
         padding-right: 14px;
         padding-bottom: 14px;
@@ -102,7 +103,7 @@
         flex-direction: column;
         justify-self: space-around;
         align-items: center;
-        background-color: #315e5e;
+        background-color: #000;
         transition: all 0.5s ease;
         z-index: 99999;
     }
@@ -118,6 +119,7 @@
         background-color: transparent;
         width: max-content;
         cursor: pointer;
+        order: 1;
     }
 
     .navbar .menu-toggler.show {
@@ -131,5 +133,11 @@
         border: 8px;
         margin: 7px 0;
         background-color: #ffffff;
+    }
+    .logo-holder {
+        order: 2;
+    }
+    .social-media {
+        order: 3;
     }
 }

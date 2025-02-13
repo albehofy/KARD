@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 export interface EmployingData {
   FullName: string;
@@ -20,7 +20,9 @@ export interface EmployingData {
   providedIn: 'root',
 })
 export class EmployingService {
+  private environment = environment.API;
   private apiUrl = `${environment.API}api/Employing`;
+  isTogglingJobs$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -45,5 +47,9 @@ export class EmployingService {
     const headers = new HttpHeaders();
 
     return this.http.post(this.apiUrl, formData, { headers });
+  }
+
+  togglingJops(): Observable<any> {
+    return this.http.get(this.environment + 'api/Toggle');
   }
 }

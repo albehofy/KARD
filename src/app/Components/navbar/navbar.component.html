@@ -1,34 +1,68 @@
 <nav class="navbar">
-    <a (click)="removeMenu(menu_toggler,links_holder)"  [routerLink]="['/']" class="logo-holder">
+    <a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/']" class="logo-holder">
         <!-- <img src="assets/images/logo.png" alt="logo" class="logo"> -->
         <img src="assets/images/logo.png" alt="logo" class="logo">
     </a>
     <section class="social-media">
-        <a href="https://www.facebook.com" target="_blank" class="social-media__link">
+        @if(socialMediaData.facebook){
+        <a [href]="socialMediaData.facebook" target="_blank" class="social-media__link">
             <i class="fab fa-facebook-f social-media__icon"></i>
         </a>
-        <a href="https://www.twitter.com" target="_blank" class="social-media__link">
+        }
+        @if(socialMediaData.snapchat){
+        <a [href]="socialMediaData.snapchat" target="_blank" class="social-media__link">
+            <i class="fab fa-snapchat-ghost social-media__icon"></i>
+        </a>
+        }
+        @if (socialMediaData.twitter) {
+        <a [href]="socialMediaData.twitter" target="_blank" class="social-media__link">
             <i class="fab fa-twitter social-media__icon"></i>
         </a>
-        <a href="https://www.instagram.com" target="_blank" class="social-media__link">
+        }
+        @if(socialMediaData.instagram){
+        <a [href]="socialMediaData.instagram" target="_blank" class="social-media__link">
             <i class="fab fa-instagram social-media__icon"></i>
         </a>
-        <a href="https://www.linkedin.com" target="_blank" class="social-media__link">
+        }
+
+        @if(socialMediaData.linkedIn){
+        <a [href]="socialMediaData.linkedin" target="_blank" class="social-media__link">
             <i class="fab fa-linkedin-in social-media__icon"></i>
         </a>
+        }
+        @if (socialMediaData.tiktok) {
+        <a [href]="socialMediaData.tiktok" target="_blank" class="social-media__link">
+            <i class="fab fa-tiktok social-media__icon"></i>
+        </a>
+        }
+        @if (socialMediaData.youTube) {
+        <a [href]="socialMediaData.youtube" target="_blank" class="social-media__link">
+            <i class="fab fa-youtube social-media__icon"></i>
+        </a>
+        }
     </section>
     <button #menu_toggler class="menu-toggler" (click)="toggleMenu(menu_toggler)">
         <span class="menu-toggler__line"></span>
         <span class="menu-toggler__line"></span>
         <span class="menu-toggler__line"></span>
-        </button>
+    </button>
     <ul class="links-holder" #links_holder>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">الرئيسية</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/about']" [routerLinkActive]="'active'">من نحن</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/careers']" [routerLinkActive]="'active'">قطاع الاعمال والشركات</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/contact']" [routerLinkActive]="'active'">اتصل بنا</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/jobs']" [routerLinkActive]="'active'">التوظيف</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/feedback']" [routerLinkActive]="'active'">الشكاوى والاستفسارات</a></li>
-        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/commonQuestions']" [routerLinkActive]="'active'"> اسئلة شائعة </a></li>
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/']"
+                [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">الرئيسية</a></li>
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/about']"
+                [routerLinkActive]="'active'">من نحن</a></li>
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/careers']"
+                [routerLinkActive]="'active'">قطاع الاعمال والشركات</a></li>
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/contact']"
+                [routerLinkActive]="'active'">اتصل بنا</a></li>
+        
+                @if(isJobsOpend){
+                    <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/jobs']"
+                    [routerLinkActive]="'active'">التوظيف</a></li>
+                }
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/feedback']"
+                [routerLinkActive]="'active'">الشكاوى والاستفسارات</a></li>
+        <li class="link-container"><a (click)="removeMenu(menu_toggler,links_holder)"
+                [routerLink]="['/commonQuestions']" [routerLinkActive]="'active'"> اسئلة شائعة </a></li>
     </ul>
 </nav>

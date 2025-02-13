@@ -20,11 +20,9 @@
         </div>
         <div class="form-group">
             <div class="input-container">
-                <p-floatlabel variant="on">
+                <label for="name">الإسم ثلاثي: </label>
                     <input pInputText id="name" [(ngModel)]="name.value" class="w-100" autocomplete="off" required
                         (change)="checkValidation(name)" />
-                    <label for="name">الإسم ثلاثي: </label>
-                </p-floatlabel>
                 <!-- Validation messages -->
                 @if(name.empty) {
                 <small class="danger">يجب ادخال الاسم</small>
@@ -36,18 +34,14 @@
 
         <div class="form-group">
             <div class="input-container">
-                <p-floatlabel variant="on">
+                    <label for="names">المدينة: </label>
                     <p-select [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"
                         placeholder="Select a city" class="w-100" />
-                    <label for="names">المدينة: </label>
-                </p-floatlabel>
             </div>
             <div class="input-container">
-                <p-floatlabel variant="on">
+                    <label for="district">الحي: </label>
                     <input pInputText id="district" [(ngModel)]="district.value" class="w-100" autocomplete="off" required
                         (change)="checkValidation(district)" />
-                    <label for="district">الحي: </label>
-                </p-floatlabel>
                 <!-- Validation messages -->
                 @if(district.empty) {
                 <small class="danger">يجب ادخال الحي</small>
@@ -57,20 +51,17 @@
 
         <div class="form-group">
             <div class="input-container">
-                <p-floatlabel variant="on">
+                <label for="requestTypes">نوع الطلب: </label>
                     <p-select [options]="requestTypes" id="requestTypes" [(ngModel)]="selectedRequestType"
                         optionLabel="name" placeholder="Select a gender" class="w-100" />
-                    <label for="requestTypes">نوع الطلب: </label>
-                </p-floatlabel>
+                
             </div>
 
-            <div class="input-container phone-container flex">
-                <p-floatlabel variant="on">
-                    <input pInputText id="phone" [(ngModel)]="phone" class="w-100" autocomplete="off" required
+            <div class="input-container">
+                <label for="phone">رقم الهاتف</label>
+                    <input pInputText id="phone" placeholder="0523121232" min="10" max="10" [(ngModel)]="phone" class="w-100 ltr" autocomplete="off" required
                         (change)="checkValidation(phone)" />
-                    <label for="phone">رقم الهاتف</label>
-                </p-floatlabel>
-                <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" />
+                <!-- <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" /> -->
             </div>
         </div>
 
@@ -82,10 +73,11 @@
             </div>
         </div>
 
-        <p class="text-blue">*جميع الشكاوى تخضع لرقابة مباشرة من الإدارة العامة</p>
+        <p>*جميع الشكاوى تخضع لرقابة مباشرة من الإدارة العامة</p>
 
         <div class="submit-container">
             <p-button label="إرسال الطلب" (onClick)="addFeedback()" />
         </div>
     </div>
+    <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
 </div>

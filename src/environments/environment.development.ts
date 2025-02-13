@@ -1,3 +1,3 @@
 export const environment = {
-    API: 'http://admin.kardsa.net/',
+    API: 'http://api.kardsa.net/',
 };

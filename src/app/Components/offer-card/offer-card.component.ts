@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-offer-card',
@@ -7,5 +7,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './offer-card.component.css'
 })
 export class OfferCardComponent {
-
+@Input() offer:any = [];
 }
