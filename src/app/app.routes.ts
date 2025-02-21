@@ -7,7 +7,6 @@ import { JobsComponent } from './Pages/jobs/jobs.component';
 import { FeedbackComponent } from './Pages/feedback/feedback.component';
 import { CommonQuestionsComponent } from './Pages/common-questions/common-questions.component';
 import { PageNotFoundComponent } from './Pages/page-not-found/page-not-found.component';
-import { QuestionComponent } from './Pages/question/question.component';
 import { PaymentsMethodsAndTermsComponent } from './Pages/payments-methods-and-terms/payments-methods-and-terms.component';
 import { ReturnOrEditProductComponent } from './Pages/return-or-edit-product/return-or-edit-product.component';
 import { PrivacyPolicyComponent } from './Pages/privacy-policy/privacy-policy.component';
@@ -21,7 +20,6 @@ export const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'jobs', component: JobsComponent },
     { path: 'feedback', component: FeedbackComponent },
-    { path: 'commonQuestions/:id', component: QuestionComponent },
     { path: 'commonQuestions', component: CommonQuestionsComponent },
     { path: 'terms-and-payments', component: PaymentsMethodsAndTermsComponent },
     { path: 'return-edit-policy', component: ReturnOrEditProductComponent },

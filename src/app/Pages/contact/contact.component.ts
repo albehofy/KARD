@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContactUsService } from '../../Services/contact-us.service';
 import { SocialmediaService } from '../../Services/social-media.service';
 import { AddTextService } from '../../Services/add-text.service';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
 
 @Component({
     selector: 'app-contact',
-    imports: [],
     templateUrl: './contact.component.html',
-    styleUrl: './contact.component.css'
+    styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
     contact = {
         company_Name: '',
         unit: '',
@@ -17,43 +17,74 @@ export class ContactComponent {
         city: '',
         country: '',
         work_hours: '',
-        whatsapp: '', 
-        CRN:''
+        whatsapp: '',
+        CRN: ''
+    };
+
+    constructor(
+        private constactUs: ContactUsService,
+        private addTextServices: AddTextService,
+        private socialMedia: SocialmediaService,
+        private isPagLoaded: IsPagesLoadedService
+    ) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
     }
-    constructor(private constactUs: ContactUsService, private addTextServices: AddTextService, private socialMedia: SocialmediaService) {
-        this.constactUs.getContactUs().subscribe(
-            {
-                next: (data) => {
-                    this.contact = data;
-                    console.log(this.contact)
-                },
-                error: (error) => {
-                    console.log(error)
-                }
-            }
-        )
 
-        this.socialMedia.getSocialMedia().subscribe(
-            {
-                next: (data) => {
-                    this.contact.whatsapp = data.whatsapp;
-                    console.log(data)
-                },
-                error: (error) => {
-                    console.log(error)
-                }
+    ngOnInit() {
+        // Fetch contact information
+        this.constactUs.getContactUs().subscribe({
+            next: (data) => {
+                this.contact = data;
+                console.log(this.contact);
+                this.checkIfDataLoaded();
+            },
+            error: (error) => {
+                console.log(error);
+                this.checkIfDataLoaded();
             }
-        )
+        });
 
+        // Fetch social media information
+        this.socialMedia.getSocialMedia().subscribe({
+            next: (data) => {
+                this.contact.whatsapp = data.whatsapp;
+                console.log(data);
+                this.checkIfDataLoaded();
+            },
+            error: (error) => {
+                console.log(error);
+                this.checkIfDataLoaded();
+            }
+        });
+
+        // Fetch CRN information
         this.addTextServices.getParagraphs('CRN').subscribe({
             next: (data) => {
                 console.log(data);
                 this.contact.CRN = data[0].paragraph;
+                this.checkIfDataLoaded();
             },
             error: (error) => {
                 console.error('There was an error!', error);
+                this.checkIfDataLoaded();
             }
         });
 
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
+    }
+
+    private checkIfDataLoaded() {
+        // Check if all required data is loaded
+        if (
+            this.contact.company_Name &&
+            this.contact.whatsapp &&
+            this.contact.CRN
+        ) {
+            this.isPagLoaded.isPageLoaded = true;
+        }
     }
 }

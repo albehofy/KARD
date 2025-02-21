@@ -1,6 +1,6 @@
 <div class="slider-container">
     <div class="overlay">
-        <img [src]="images[currentImageIndex]" class="slider" alt="slider 1">
+        <img [src]="images[currentImageIndex]" class="slider pointer" alt="slider 1" [routerLink]="['/offer']">
         <div class="slider-parts">
             @if (currentImageIndex == 0) {
                 <img [src]="images[images.length -1]" (click)="goToSlide(images.length - 1)" alt="">

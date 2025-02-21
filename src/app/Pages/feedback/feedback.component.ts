@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FloatLabelModule } from "primeng/floatlabel"
+import { FloatLabelModule } from "primeng/floatlabel";
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { FeedbackService, Feedback } from '../../Services/feedback.service';
 import { RippleModule } from 'primeng/ripple';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
+
 interface Select {
     name: string;
     code: number;
@@ -26,7 +28,7 @@ interface UploadEvent {
 
 @Component({
     selector: 'app-feedback',
-    imports: [CommonModule,ButtonModule,SelectModule,ToastModule,FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink,RippleModule],
+    imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink, RippleModule],
     templateUrl: './feedback.component.html',
     styleUrl: './feedback.component.css',
     providers: [MessageService]
@@ -39,21 +41,21 @@ export class FeedbackComponent implements OnInit {
         invalid: false,
         empty: false,
         errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
-    }
+    };
     district = {
         pattern: "^[\u0621-\u064A]{2,}\\s]",
         value: "",
         invalid: false,
         empty: false,
         errorMessage: "الرجاء إدخال الاسم باللغة العربية والتأكد من أنه يحتوي على اسم الاب واللقب او الجد"
-    }
+    };
     notes = {
         pattern: "^[\u0621-\u064A]{2,}",
         value: "",
         invalid: false,
         empty: false,
         errorMessage: "الرجاء إدخال اسم الشركة باللغة العربية"
-    }
+    };
     gender: Select[] = [
         {
             name: "ذكر",
@@ -100,33 +102,41 @@ export class FeedbackComponent implements OnInit {
     selectedGender = this.gender[0];
     selectedCity = this.cities[0];
     selectedRequestType = this.requestTypes[0];
-    age:any;
+    age: any;
     phone = '';
     home: MenuItem | undefined;
 
-    constructor(private messageService: MessageService, private feedbackService: FeedbackService) {
-    }
-    
-    onBasicUploadAuto(event: UploadEvent | any) {
-        this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
-        console.log(event.files);
+    constructor(private messageService: MessageService, private feedbackService: FeedbackService, private isPagLoaded: IsPagesLoadedService) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
     }
 
     ngOnInit() {
+        // Simulate page loading
         this.items = [
             { label: 'الشكاوى والاستفسارات', icon: 'pi pi-people', routerLink: '/feedback' },
         ];
 
         this.home = { icon: 'pi pi-home', routerLink: '/' };
+
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
+    }
+
+    onBasicUploadAuto(event: UploadEvent | any) {
+        this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
+        console.log(event.files);
     }
 
     checkValidation(item: any) {
         // The regex pattern for 3 Arabic words
         const reg = new RegExp(item.pattern);
-    
+
         // Trim input to remove any unwanted spaces before and after
         const inputValue = item.value.trim();
-        
+
         // Check if the value is empty
         if (inputValue === "" || inputValue === null) {
             item.empty = true;
@@ -161,6 +171,7 @@ export class FeedbackComponent implements OnInit {
             }
         });
     }
+
     show() {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
     }

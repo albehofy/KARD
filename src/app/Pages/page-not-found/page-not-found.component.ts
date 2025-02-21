@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
 
 @Component({
     selector: 'app-page-not-found',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
     styleUrl: './page-not-found.component.css'
 })
 export class PageNotFoundComponent {
-
+    constructor(private isPagLoaded: IsPagesLoadedService){
+        window.setTimeout(() => { 
+            this.isPagLoaded.isPageLoaded = true;
+        }, 3000);
+    }
 }

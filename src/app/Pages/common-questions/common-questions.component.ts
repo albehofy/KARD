@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AccordionModule } from 'primeng/accordion';
 import { InputIconModule } from 'primeng/inputicon';
@@ -6,66 +6,59 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonQuestionsService } from '../../Services/common-questions.service';
-// import { Header } from 'primeng/api';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
+
 @Component({
     selector: 'app-common-questions',
     imports: [AccordionModule, InputTextModule, InputIconModule, IconFieldModule, ButtonModule],
     templateUrl: './common-questions.component.html',
-    styleUrl: './common-questions.component.css'
+    styleUrls: ['./common-questions.component.css']
 })
-export class CommonQuestionsComponent {
-    commonQuestions: any[] = [
-        {
-            header: 'ماهو الهدف من موقع الويب هذا؟',
-            content: 'هذا الموقع يهدف إلى توفير معلومات عن الأمراض النفسية والعلاجات المتاحة لها، وكذلك توفير خدمات الاستشارة عبر الإنترنت.'
-        },
-        {
-            header: 'ما هي الخدمات المقدمة هنا؟',
-            content: 'يقدم الموقع مقالات تعليمية، ندوات افتراضية، وخدمات استشارة طبية مخصصة.'
-        },
-        {
-            header: 'من هو الجمهور المستهدف؟',
-            content: 'الأشخاص الذين يعانون من اضطرابات نفسية ويرغبون في معرفة المزيد أو الحصول على استشارات متخصصة.'
-        },
-        {
-            header: 'كيف يمكنني الوصول إلى الخدمات؟',
-            content: 'يمكنك التسجيل وإنشاء حساب للوصول إلى خدمات الاستشارة ومشاهدة المحتوى التعليمي.'
-        },
-        {
-            header: 'هل تتوفر خدمات مجانية؟',
-            content: 'نعم، يتوفر العديد من المقالات والموارد المجانية، مع خيارات مدفوعة للاستشارات المخصصة.'
-        },
-        {
-            header: 'ما هي فوائد استخدام الموقع؟',
-            content: 'يوفر معلومات دقيقة وشاملة، إمكانية التواصل مع خبراء، ودعم لتحسين الصحة النفسية.'
-        },
-        {
-            header: 'هل يمكنني التواصل مع الخبراء مباشرة؟',
-            content: 'نعم، من خلال خدمات الاستشارة عبر الإنترنت يمكنك حجز جلسة مع أحد الخبراء.'
-        }
-    ]
-    constructor(private commonQuestionsService: CommonQuestionsService) { }
-    ngOnInit() {
-        this.commonQuestions = [];
-    
-        this.questions = this.commonQuestions; // Initially, display all questions
-        
-        this.commonQuestionsService.getCommonQuestions().subscribe((data) => {
-          this.commonQuestions = data;
-        this.questions = this.commonQuestions; // Initially, display all questions
-    
-        });
-      }
+export class CommonQuestionsComponent implements OnInit {
+    commonQuestions: any[] = [];
+    questions: any[] = [];
     dt2: any;
     dt1: any;
+
+    constructor(
+        private commonQuestionsService: CommonQuestionsService,
+        private isPagLoaded: IsPagesLoadedService
+    ) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
+    }
+
+    ngOnInit() {
+        // Fetch common questions from the service
+        this.commonQuestionsService.getCommonQuestions().subscribe({
+            next: (data) => {
+                this.commonQuestions = data;
+                this.questions = this.commonQuestions; // Initially, display all questions
+                this.checkIfDataLoaded();
+            },
+            error: (error) => {
+                console.error('Error fetching common questions:', error);
+                this.checkIfDataLoaded();
+            }
+        });
+
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
+    }
+
+    private checkIfDataLoaded() {
+        // Check if the common questions data is loaded
+        if (this.commonQuestions.length > 0) {
+            this.isPagLoaded.isPageLoaded = true;
+        }
+    }
+
     clear(arg0: any) {
         throw new Error('Method not implemented.');
     }
 
- 
-
-    questions: any[] = this.commonQuestions;
-    
     searchingofQuestion(value: string) {
         this.questions = this.commonQuestions.filter((val) =>
             val.header.toLowerCase().includes(value.toLowerCase()) ||
@@ -73,5 +66,4 @@ export class CommonQuestionsComponent {
         );
         console.log(this.questions);
     }
-    
 }

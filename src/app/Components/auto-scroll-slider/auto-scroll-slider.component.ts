@@ -2,16 +2,17 @@ import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeService } from '../../Services/home.service';
 import { BehaviorSubject } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-auto-scroll-slider',
   templateUrl: './auto-scroll-slider.component.html',
   styleUrls: ['./auto-scroll-slider.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule,RouterLink]
 })
 export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnInit {
   currentImageIndex: number = 0;
-  images: string[] = ['https://placehold.co/1400x700',];
+  images: string[] = [];
   intervalValue: any;
   isAutoScrollPaused: boolean = false;  // New flag to track pause status
 

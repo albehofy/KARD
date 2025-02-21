@@ -15,6 +15,7 @@ export class HomeAddsComponent {
   @Input() logos: any;
   videoUrl: SafeResourceUrl = '';
 
+  videoLink= ''
   constructor(private sanitizer: DomSanitizer, private homeService: HomeService) { 
     this.fetchVideoUrl();
   } 
@@ -33,6 +34,7 @@ export class HomeAddsComponent {
     this.homeService.getParagraphs('video_link').subscribe({
       next: data => {
         const unsafeUrl = data[0].paragraph; // Get the unsafe URL
+        this.videoLink = data[0].paragraph; // Get the unsafe URL
         this.videoUrl = this.sanitizeUrl(unsafeUrl); // Sanitize it
       },
       error: error => {

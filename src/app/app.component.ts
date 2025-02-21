@@ -5,20 +5,23 @@ import { FooterComponent } from "./Components/footer/footer.component";
 import { LoaderComponent } from './Pages/loader/loader.component';
 import { EmployingService } from './Services/employing-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { IsPagesLoadedService } from './Services/is-pages-loaded.service';
+import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, NavbarComponent, FooterComponent, LoaderComponent],
+    imports: [RouterOutlet, NavbarComponent, FooterComponent, LoaderComponent, CommonModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'kard';
-  isloaded = false;
-  constructor(private employeeService: EmployingService) { 
-      window.setTimeout(() => {
-          this.isloaded = true; 
-        },1500);
+    title = 'kard';
+    isloaded = false;
+    constructor(private employeeService: EmployingService,private isPageLoaded: IsPagesLoadedService) {
+        // window.setTimeout(() => {
+        //     this.isloaded = true;
+        // }, 1500);
     }
+
     ngOnInit(): void {
         this.employeeService.togglingJops().subscribe({
             next: (response) => {
@@ -27,6 +30,14 @@ export class AppComponent implements OnInit {
             error: (error) => {
                 alert('حدث خطأ ما');
             }
+        }); 
+
+        this.isPageLoaded.isPageLoaded.subscribe({
+            next: (response) => {
+                this.isloaded = response;
+            }
         })
+
     }
+
 }

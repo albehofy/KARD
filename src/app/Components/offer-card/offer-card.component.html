@@ -1,30 +1,38 @@
 <!-- offers -->
+@if(offer.length > 0){
 <div class="container">
     <h1>عروضنا</h1>
     <section class="offers" id="offers">
         @for (offer of offer; track $index) {
-            <a class="offer-card" [routerLink]="['/offer']">
-                <div class="overlay-container">
-                    <img [src]="'data:image/png;base64,'+offer.photo" alt="offer1">
-                    <div class="overlay">
-                        <h4>اطلب المنتج الان</h4>
-                    </div>
-                </div>
-                <h4>{{offer.title}}</h4>
-                <p>{{offer.descriptioin}}</p>
-            </a>
-        }
-          <!-- <a class="offer-card" [routerLink]="['/offer']">
+        <a class="offer-card" [routerLink]="['/offer']">
             <div class="overlay-container">
-                <img src="assets/images/offer1.png" alt="offer2">
+                <img [src]="'data:image/png;base64,'+offer.photo" alt="offer1">
                 <div class="overlay">
-                    <h4>وصف تجريبي للمنتج ونوع التصميم</h4>
+                    <h4>اطلب المنتج الان</h4>
                 </div>
             </div>
-            <h4>بكج 3 ثياب</h4>
-            <p>ابتداءً من <span class="price">999</span> <small class="price-offer">1499</small> ريال حسب اختيارك
-                الاقمشة
-            </p>
-        </a> -->
+            <h4>{{offer.title}}</h4>
+            <p>{{offer.description}}</p>
+            @if (offer.discountedPrice) {
+            <p class="discount">بسعر <span class="price">{{offer.price}} ريال</span> بدلا من <small
+                    class="price-offer">{{offer.discountedPrice}} ريال</small> </p>
+            }@else {
+            <p class="discount">بسعر <span class="price">{{offer.price}}</span> ريال</p>
+            }
+        </a>
+        }
+        <!-- <a class="offer-card" [routerLink]="['/offer']">
+                 <div class="overlay-container">
+                     <img src="assets/images/offer1.png" alt="offer2">
+                     <div class="overlay">
+                         <h4>وصف تجريبي للمنتج ونوع التصميم</h4>
+                     </div>
+                 </div>
+                 <h4>بكج 3 ثياب</h4>
+                 <p>ابتداءً من <span class="price">999</span> <small class="price-offer">1499</small> ريال حسب اختيارك
+                     الاقمشة
+                 </p>
+             </a> -->
     </section>
 </div>
+}

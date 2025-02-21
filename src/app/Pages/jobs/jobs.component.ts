@@ -13,7 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { EmployingService, EmployingData } from '../../Services/employing-data.service';
-import { event } from 'jquery';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
 
 interface SelectInterface {
     name: string;
@@ -29,13 +29,13 @@ interface UploadEvent {
     selector: 'app-jobs',
     imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, Breadcrumb, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, RouterLink],
     templateUrl: './jobs.component.html',
-    styleUrl: './jobs.component.css',
+    styleUrls: ['./jobs.component.css'],
     standalone: true,
     providers: [MessageService, EmployingService] // Add EmployingService to providers
 })
 export class JobsComponent implements OnInit {
     items: MenuItem[] | undefined;
-    jobsStatus:boolean = false;
+    jobsStatus: boolean = false;
     name = {
         pattern: "^[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}\\s[\u0621-\u064A]{2,}",
         value: "",
@@ -108,23 +108,21 @@ export class JobsComponent implements OnInit {
         { name: "مندوب توصيل", code: 1 },
         { name: "قياس", code: 2 },
         { name: "مبيعات وخدمة عملاء", code: 3 }
-    ]
-
+    ];
     educations: SelectInterface[] = [
         { name: "ثانوية فأقل", code: 1 },
         { name: "دبلوم", code: 2 },
         { name: "بكالريوس", code: 3 },
         { name: "ماجستير", code: 4 },
         { name: "دكتوراة", code: 5 }
-
-    ]
+    ];
     experincesYears: SelectInterface[] = [
         { name: "أقل من سنة", code: 1 },
         { name: "من سنة الى سنتين", code: 2 },
         { name: "من 3 سنوات الى 5 سنوات", code: 3 },
         { name: "من 6 سنوات الى 10 سنوات", code: 4 },
         { name: "اكثر من 10 سنوات", code: 5 }
-    ]
+    ];
     selectedGender = this.gender[0];
     selectedCity = this.cities[0];
     selectedNationality = this.nationalities[0];
@@ -136,29 +134,45 @@ export class JobsComponent implements OnInit {
     cvFile: File | null = null; // To store the uploaded CV file
     home: MenuItem | undefined;
 
-    isJobsOpend:any;
-    
-    constructor(private messageService: MessageService,private employingService: EmployingService ) {
+    isJobsOpend: any;
+
+    constructor(
+        private messageService: MessageService,
+        private employingService: EmployingService,
+        private isPagLoaded: IsPagesLoadedService
+    ) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
+    }
+
+    ngOnInit() {
+        // Fetch jobs status
         this.employingService.togglingJops().subscribe({
             next: (response) => {
                 this.isJobsOpend = response;
+                this.checkIfDataLoaded();
             },
             error: (error) => {
                 alert('حدث خطأ ما');
+                this.checkIfDataLoaded();
             }
-        })
+        });
+
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
+
+        // Initialize breadcrumb items
+        this.items = [
+            { label: 'التوظيف', icon: 'pi pi-people', routerLink: '/jobs' },
+        ];
+        this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
 
     onBasicUploadAuto(event: any) {
         this.cvFile = event.files[0]; // Store the uploaded file
         this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
-    }
-
-    ngOnInit() {
-        this.items = [
-            { label: 'التوظيف', icon: 'pi pi-people', routerLink: '/jobs' },
-        ];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
     }
 
     checkValidation(item: any) {
@@ -191,6 +205,7 @@ export class JobsComponent implements OnInit {
             this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'الرجاء إدخال رقم جوال صحيح' });
             return;
         }
+
         // Prepare the data for submission
         const employingData: EmployingData = {
             FullName: this.name.value,
@@ -206,23 +221,25 @@ export class JobsComponent implements OnInit {
             Note: '' // Add a note field if needed
         };
 
-        alert("test")
         // Submit the data
-        this.employingService.submitEmployingData(employingData).subscribe(
-            {
-                next: (response) => {
-                    this.messageService.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال الطلب بنجاح' });
-                    alert('تم الارسال بنجاح');
-
-                    console.log('Submission successful:', response);
-                },
-                error: (error) => {
-                    this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ أثناء إرسال الطلب' });
-                    alert('فشل الارسال');
-
-                    console.error('Submission error:', error);
-                }
+        this.employingService.submitEmployingData(employingData).subscribe({
+            next: (response) => {
+                this.messageService.add({ severity: 'success', summary: 'نجاح', detail: 'تم إرسال الطلب بنجاح' });
+                alert('تم الارسال بنجاح');
+                console.log('Submission successful:', response);
+            },
+            error: (error) => {
+                this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'حدث خطأ أثناء إرسال الطلب' });
+                alert('فشل الارسال');
+                console.error('Submission error:', error);
             }
-        );
+        });
+    }
+
+    private checkIfDataLoaded() {
+        // Check if the jobs status is loaded
+        if (this.isJobsOpend !== undefined) {
+            this.isPagLoaded.isPageLoaded = true;
+        }
     }
 }

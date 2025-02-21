@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { AddTextService } from '../../Services/add-text.service';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
 
 @Component({
     selector: 'app-about',
-    imports: [ ButtonModule],
+    imports: [ButtonModule],
     templateUrl: './about.component.html',
-    styleUrl: './about.component.css'
+    styleUrls: ['./about.component.css']
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
+    [key: string]: any;
     whoIsUsAr: string = '';
     whoIsUsEn: string = '';
     prefInAr: string = '';
@@ -21,115 +23,61 @@ export class AboutComponent {
     qualityAr: string = '';
     customerInAr: string = '';
     customerInEn: string = '';
-  
-    constructor(private addTextServices: AddTextService) { 
-      this.addTextServices.getParagraphs('whoIsUsAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.whoIsUsAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
+
+    constructor(
+        private addTextServices: AddTextService,
+        private isPagLoaded: IsPagesLoadedService
+    ) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
+    }
+
+    ngOnInit() {
+        // Fetch all paragraphs
+        this.fetchParagraphs();
+
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
+    }
+
+    private fetchParagraphs() {
+        const paragraphs = [
+            'whoIsUsAr', 'whoIsUsEn', 'prefInAr', 'prefInEn', 'vessionInAr', 'vessionInEn',
+            'messageInAr', 'messageInEn', 'qualityEn', 'qualityAr', 'customerInAr', 'customerInEn'
+        ];
+
+        let loadedCount = 0;
+
+        paragraphs.forEach((paragraph) => {
+            this.addTextServices.getParagraphs(paragraph).subscribe({
+                next: (data) => {
+                    this[paragraph] = data[0].paragraph;
+                    loadedCount++;
+                    if (loadedCount === paragraphs.length) {
+                        this.checkIfDataLoaded();
+                    }
+                },
+                error: (error) => {
+                    console.error(`Error fetching ${paragraph}:`, error);
+                    loadedCount++;
+                    if (loadedCount === paragraphs.length) {
+                        this.checkIfDataLoaded();
+                    }
+                }
+            });
+        });
+    }
+
+    private checkIfDataLoaded() {
+        // Check if all paragraphs are loaded
+        if (
+            this.whoIsUsAr && this.whoIsUsEn && this.prefInAr && this.prefInEn &&
+            this.vessionInAr && this.vessionInEn && this.messageInAr && this.messageInEn &&
+            this.qualityEn && this.qualityAr && this.customerInAr && this.customerInEn
+        ) {
+            this.isPagLoaded.isPageLoaded = true;
         }
-      })
-      this.addTextServices.getParagraphs('whoIsUsEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.whoIsUsEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('prefInAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.prefInAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('prefInEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.prefInEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('vessionInAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.vessionInAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('vessionInEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.vessionInEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('messageInAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.messageInAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('messageInEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.messageInEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('qualityEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.qualityEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('qualityAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.qualityAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('customerInAr').subscribe({
-        next: data => {
-          console.log(data);
-          this.customerInAr = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-      this.addTextServices.getParagraphs('customerInEn').subscribe({
-        next: data => {
-          console.log(data);
-          this.customerInEn = data[0].paragraph;
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
     }
 }

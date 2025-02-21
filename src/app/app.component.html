@@ -1,10 +1,11 @@
-@if(isloaded){
+<div [ngClass]="{'none': !isloaded}">
 
-<app-navbar/>
-<div class="layout">
-    <router-outlet/>
+    <app-navbar />
+    <div class="layout">
+        <router-outlet />
+    </div>
+    <app-footer />
 </div>
-<app-footer/>
-}@else {
-    <app-loader/>
-}
+<div [ngClass]="{'none': isloaded}">
+    <app-loader />
+</div>

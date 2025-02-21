@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { AutoScrollSliderComponent } from '../../Components/auto-scroll-slider/auto-scroll-slider.component';
 import { OrderService } from '../../Services/add-order.service';
+import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
 
 interface Gender {
     name: string;
@@ -24,14 +25,13 @@ interface UploadEvent {
 }
 
 @Component({
-  selector: 'app-order-page',
-  imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, AutoScrollSliderComponent],
-  templateUrl: './order-page.component.html',
-  styleUrl: './order-page.component.css',
-  providers: [MessageService]
+    selector: 'app-order-page',
+    imports: [CommonModule, ButtonModule, SelectModule, ToastModule, FileUploadModule, FloatLabelModule, InputNumberModule, InputTextModule, FormsModule, AutoScrollSliderComponent],
+    templateUrl: './order-page.component.html',
+    styleUrls: ['./order-page.component.css'],
+    providers: [MessageService]
 })
 export class OrderPageComponent implements OnInit {
-    
     requestType: any;
     order: any = {
         order_Serv: "",
@@ -85,23 +85,33 @@ export class OrderPageComponent implements OnInit {
     home: MenuItem | undefined;
     allOffers: any[] = [];
 
-    constructor(private messageService: MessageService, private orderServices: OrderService) {}
+    constructor(
+        private messageService: MessageService,
+        private orderServices: OrderService,
+        private isPagLoaded: IsPagesLoadedService
+    ) {
+        // Set the initial loading state to false
+        this.isPagLoaded.isPageLoaded = false;
+    }
 
     ngOnInit() {
         this.loadOffers();
-    
+
         this.items = [
             { label: 'الشكاوى والاستفسارات', icon: 'pi pi-people', routerLink: '/feedback' }
         ];
-    
+
         this.home = { icon: 'pi pi-home', routerLink: '/' };
-    
-        // ✅ Select the first available city automatically
+
         if (this.cites.length > 0) {
             this.order.client_City = this.cites[0];
         }
+
+        // Set a timeout to ensure the loader is displayed for at least 2 seconds
+        window.setTimeout(() => {
+            this.isPagLoaded.isPageLoaded = true;
+        }, 2000);
     }
-    
 
     loadOffers() {
         this.orderServices.getAllOffers().subscribe({
@@ -109,21 +119,22 @@ export class OrderPageComponent implements OnInit {
                 this.allOffers = response
                     .filter((element: any) => element.price !== null)
                     .map((element: any) => ({ name: element.title, id: element.id }));
-    
+
                 // ✅ Select the first available offer automatically
                 if (this.allOffers.length > 0) {
                     this.order.order_Serv = this.allOffers[0];
                 }
-    
+
                 console.log(this.allOffers);
+                this.checkIfDataLoaded();
             },
             error: (error) => {
                 console.error("Error fetching offers:", error);
                 this.messageService.add({ severity: 'error', summary: 'خطأ', detail: 'فشل تحميل العروض' });
+                this.checkIfDataLoaded();
             }
         });
     }
-    
 
     onBasicUploadAuto(event: UploadEvent | any) {
         this.messageService.add({ severity: 'info', summary: 'اكتمل التحميل', detail: 'تم تحميل الملف بنجاح' });
@@ -133,7 +144,7 @@ export class OrderPageComponent implements OnInit {
     checkValidation(item: any) {
         const reg = new RegExp(item.pattern);
         const inputValue = item.value.trim();
-        
+
         if (!inputValue) {
             item.empty = true;
         } else if (reg.test(inputValue)) {
@@ -159,5 +170,12 @@ export class OrderPageComponent implements OnInit {
                 this.messageService.add({ severity: 'error', summary: 'حدث خطأ', detail: 'فشل في إضافة الطلب' });
             }
         });
+    }
+
+    private checkIfDataLoaded() {
+        // Check if the offers data is loaded
+        if (this.allOffers.length > 0) {
+            this.isPagLoaded.isPageLoaded = true;
+        }
     }
 }

@@ -2,8 +2,17 @@
 <h2 class="py-2">لية تختار كــــــــــــارد</h2>
 <section class="overview" id="overview">
     @for (item of items; track $index) {
+
         <div [ngClass]="{'card': true, 'card-special': ($index + 1) % 2 === 0}">
-            <i class="fa-solid fa-gem"></i>
+            @if ($index == 0) {
+                <i class="fa-solid fa-star"></i> <!-- الجودة -->
+            }@else if ($index == 1) {
+                <!-- <i class="fa-solid fa-ruler-combined"></i> الدقة -->
+                 <i class="fa-solid fa-crosshairs"></i> <!-- الدقة -->
+
+            }
+            @else if ($index == 2) {
+                <i class="fa-solid fa-shield"></i> <!-- الضمان -->            }
             <h4>{{ item.title }}</h4>
             <p class="title">
                 {{ item.paragraph }}

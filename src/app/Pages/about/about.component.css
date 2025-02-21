@@ -121,9 +121,9 @@
     height: max-content;
 }
 
-.m-left-auto-right-0 {
-    margin-right: 0;
-    margin-left: auto!important;
+.m-left-0-right-auto {
+    margin-right: auto;
+    margin-left: 0!important;
 }
 
 .img-auto{
