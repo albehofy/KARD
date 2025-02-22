@@ -7,6 +7,7 @@ import { EmployingService } from './Services/employing-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IsPagesLoadedService } from './Services/is-pages-loaded.service';
 import { CommonModule } from '@angular/common';
+import { MenuTogglerService } from './Services/menu-toggler.service';
 @Component({
     selector: 'app-root',
     imports: [RouterOutlet, NavbarComponent, FooterComponent, LoaderComponent, CommonModule],
@@ -16,12 +17,15 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
     title = 'kard';
     isloaded = false;
-    constructor(private employeeService: EmployingService,private isPageLoaded: IsPagesLoadedService) {
+    constructor(private employeeService: EmployingService,private isPageLoaded: IsPagesLoadedService, private menuToggler: MenuTogglerService) {
         // window.setTimeout(() => {
         //     this.isloaded = true;
         // }, 1500);
     }
 
+    removeMenu() {
+        this.menuToggler.isMenuOpen.next(true);
+    }
     ngOnInit(): void {
         this.employeeService.togglingJops().subscribe({
             next: (response) => {

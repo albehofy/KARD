@@ -11,7 +11,7 @@
 }
 html, body{
     direction: rtl;
-    background-color: beige;
+    background-color: hsl(0deg 0% 93.38%);
 }
 .container {
     font-family: 'pnu', sans-serif;

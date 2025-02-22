@@ -15,7 +15,7 @@
         </p-breadcrumb>
 
         <div class="page-title">
-            <h2>تسجيل بيانات شكوى - او استفسار</h2>
+            <h2>{{FeedBackInfo}}</h2>
             <p>املأ النموذج أدناه لإرسال رسالتك بشكل صحيح</p>
         </div>
         <div class="form-group">
@@ -58,10 +58,14 @@
             </div>
 
             <div class="input-container">
-                <label for="phone">رقم الهاتف</label>
-                    <input pInputText id="phone" placeholder="0523121232" min="10" max="10" [(ngModel)]="phone" class="w-100 ltr" autocomplete="off" required
-                        (change)="checkValidation(phone)" />
-                <!-- <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" /> -->
+                <label for="phone">الجوال:</label>
+                <input pInputText id="phone" #phoneRef [(ngModel)]="phone" class="w-100"
+                    autocomplete="off" placeholder="0511111111" required maxlength="10" (ngModelChange)="validatePhone($event)" />
+
+                <small *ngIf="isPhoneInvalid" class="danger w-100">
+                    يجب أن يكون رقم الجوال مكون من 10 أرقام
+                    وان يبدأ بـ 05 مثل 0599999999
+                </small>                <!-- <input pInputText id="phoneKey" value="+966" disabled autocomplete="off" required class="phone-key" /> -->
             </div>
         </div>
 
@@ -76,7 +80,7 @@
         <p>*جميع الشكاوى تخضع لرقابة مباشرة من الإدارة العامة</p>
 
         <div class="submit-container">
-            <p-button label="إرسال الطلب" (onClick)="addFeedback()" />
+            <p-button label="إرسال الطلب"  [disabled]="isPhoneInvalid || phoneRef.value ==''" (onClick)="addFeedback()" />
         </div>
     </div>
     <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />

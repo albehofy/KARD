@@ -104,7 +104,6 @@ padding-top: 21px;
 display: flex;
 justify-content: space-between;
 align-items: flex-start;
-flex-wrap: wrap;
 gap: 20px;
 }
 
@@ -139,10 +138,9 @@ color: #fff!important;
 }
 
 
-/* #phone {
-border-bottom-left-radius: 0;
-border-top-left-radius: 0;
-} */
+#phone {
+text-align: left;
+}
 
 
 .files-container {
@@ -199,4 +197,10 @@ textarea:focus{
 
 .text-blue {
 color: #5e46b6;
+}
+
+@media only screen and (max-width: 771px) {
+    .form-group {
+        flex-wrap: wrap;
+    }
 }

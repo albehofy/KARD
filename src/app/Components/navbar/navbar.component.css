@@ -16,11 +16,10 @@
 }
 
 .logo {
-    width: 102px;
-    margin-top: -29px;
+    margin-top: -14px;
     cursor: pointer;
-    /* background-color: #ffffff; */
-    border-radius: 50%;
+    /* border-radius: 50%; */
+    height: 75px;
 }
 
 .navbar .menu-toggler {
@@ -136,7 +135,7 @@
         height: 3px;
         border: 8px;
         margin: 7px 0;
-        background-color: #ffffff;
+        background-color: #000;
     }
     .logo-holder {
         order: 2;

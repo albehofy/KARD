@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { FeedbackService, Feedback } from '../../Services/feedback.service';
 import { RippleModule } from 'primeng/ripple';
 import { IsPagesLoadedService } from '../../Services/is-pages-loaded.service';
+import { HomeService } from '../../Services/home.service';
 
 interface Select {
     name: string;
@@ -105,17 +106,32 @@ export class FeedbackComponent implements OnInit {
     age: any;
     phone = '';
     home: MenuItem | undefined;
+    FeedBackInfo: MenuItem | undefined;
 
-    constructor(private messageService: MessageService, private feedbackService: FeedbackService, private isPagLoaded: IsPagesLoadedService) {
+    constructor(private messageService: MessageService, private feedbackService: FeedbackService, private isPagLoaded: IsPagesLoadedService,private homeServices: HomeService) {
         // Set the initial loading state to false
         this.isPagLoaded.isPageLoaded = false;
     }
 
+    isPhoneInvalid: boolean = false;
+    
+    validatePhone(phone: string): void {
+    this.isPhoneInvalid = phone ? !/^05\d{8}$/.test(phone) : false;
+    }
     ngOnInit() {
         // Simulate page loading
         this.items = [
             { label: 'الشكاوى والاستفسارات', icon: 'pi pi-people', routerLink: '/feedback' },
         ];
+
+        this.homeServices.getParagraphs('addFeedBackInfo').subscribe({
+            next: data => {
+              this.FeedBackInfo = data[0].paragraph;
+            },
+            error: error => {
+              console.error('There was an error!', error);
+            }
+          })
 
         this.home = { icon: 'pi pi-home', routerLink: '/' };
 

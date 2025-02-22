@@ -67,7 +67,7 @@ h1 {
     overflow: hidden;
 }
 .accordion-conatiner,.p-accordioncontent-content, ::ng-deep .p-accordioncontent-content,   .accordion-conatiner * {
-    background-color: beige!important;
+    background-color: hsl(0deg 0% 93.38%)!important;
 }
 .mx-auto {
     width: 75%;

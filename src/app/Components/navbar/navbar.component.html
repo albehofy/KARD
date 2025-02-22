@@ -1,7 +1,7 @@
 <nav class="navbar">
     <a (click)="removeMenu(menu_toggler,links_holder)" [routerLink]="['/']" class="logo-holder">
         <!-- <img src="assets/images/logo.png" alt="logo" class="logo"> -->
-        <img src="assets/images/logo.png" alt="logo" class="logo">
+        <img src="{{homeLogoImage}}" alt="logo" class="logo">
     </a>
     <section class="social-media">
         @if(socialMediaData.facebook){

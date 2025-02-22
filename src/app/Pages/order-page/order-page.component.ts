@@ -171,7 +171,11 @@ export class OrderPageComponent implements OnInit {
             }
         });
     }
-
+    isPhoneInvalid: boolean = false;
+    
+    validatePhone(phone: string): void {
+    this.isPhoneInvalid = phone ? !/^05\d{8}$/.test(phone) : false;
+    }
     private checkIfDataLoaded() {
         // Check if the offers data is loaded
         if (this.allOffers.length > 0) {

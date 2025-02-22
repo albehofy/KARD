@@ -39,6 +39,7 @@ export class OrderComponent {
         companyName: string = '';
         mobileNumber: string = '';
         note: string = '';
+        
     constructor(private messageService: MessageService, private order: OrderService, private carrersService: CarrersService) {
         this.order.getAllOffers().subscribe({
             next: (response) => {
@@ -81,6 +82,12 @@ export class OrderComponent {
             console.error('There was an error!', error);
           }
         })  
+      }
+
+      isPhoneInvalid: boolean = false;
+    
+      validatePhone(phone: string): void {
+      this.isPhoneInvalid = phone ? !/^05\d{8}$/.test(phone) : false;
       }
 
 }

@@ -18,9 +18,14 @@
               
             </div>       
             <div class="input-container">
-                <label for="phone">رقم الهاتف</label>
-                    <input pInputText id="phone" [(ngModel)]="mobileNumber" class="w-100" autocomplete="off" required
-                         />
+                         <label for="phone">الجوال:</label>
+                    <input pInputText id="phone" #phoneRef [(ngModel)]="mobileNumber" class="w-100"
+                        autocomplete="off" placeholder="0511111111" required maxlength="10" (ngModelChange)="validatePhone($event)" />
+                    
+                    <small *ngIf="isPhoneInvalid" class="danger">
+                        يجب أن يكون رقم الجوال مكون من 10 أرقام
+                        وان يبدأ بـ 05 مثل 0599999999
+                    </small>
             </div>     
         </div>
 
@@ -35,7 +40,7 @@
 
 
         <div class="submit-container">
-            <p-button  (click)="addOrder()" label="إرسال الطلب" />
+            <p-button  (click)="addOrder()"  [disabled]="isPhoneInvalid || phoneRef.value ==''" label="إرسال الطلب" />
         </div>
 
     </div>

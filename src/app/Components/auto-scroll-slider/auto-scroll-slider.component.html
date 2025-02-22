@@ -1,21 +1,23 @@
 <div class="slider-container">
     <div class="overlay">
         <img [src]="images[currentImageIndex]" class="slider pointer" alt="slider 1" [routerLink]="['/offer']">
-        <div class="slider-parts">
-            @if (currentImageIndex == 0) {
-                <img [src]="images[images.length -1]" (click)="goToSlide(images.length - 1)" alt="">
-                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==   currentImageIndex} " (click)="goToSlide(currentImageIndex)" alt="">
-                <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
-            }@else if (currentImageIndex == images.length - 1) {
-                <img [src]="images[currentImageIndex -1]"  alt="">
-                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==  currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
-                <img [src]="images[0]" (click)="goToSlide(0)" alt="">
-            }@else {
-                <img [src]="images[currentImageIndex - 1]" alt="">
-                <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex ==  currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
-                <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
-            }
-        </div>
+        <i class="fas fa-chevron-left prev-icon" (click)="previousSlide()"></i>
+        <i class="fas fa-chevron-right next-icon" (click)="nextSlide()"></i>
+        <!-- <ng-container *ngIf="currentImageIndex == 0">
+            <img [src]="images[images.length -1]" (click)="goToSlide(images.length - 1)" alt="">
+            <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex == currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
+            <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
+        </ng-container>
+        <ng-container *ngIf="currentImageIndex == images.length - 1">
+            <img [src]="images[currentImageIndex -1]" alt="">
+            <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex == currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
+            <img [src]="images[0]" (click)="goToSlide(0)" alt="">
+        </ng-container>
+        <ng-container *ngIf="currentImageIndex != 0 && currentImageIndex != images.length - 1">
+            <img [src]="images[currentImageIndex - 1]" alt="">
+            <img [src]="images[currentImageIndex]" [ngClass]="{'active': currentImageIndex == currentImageIndex}" (click)="goToSlide(currentImageIndex)" alt="">
+            <img [src]="images[currentImageIndex + 1]" (click)="goToSlide(currentImageIndex + 1)" alt="">
+        </ng-container> -->
     </div>
     <!-- <button>open video</button> -->
 </div>

@@ -1,10 +1,12 @@
 <div [ngClass]="{'none': !isloaded}">
 
     <app-navbar />
-    <div class="layout">
-        <router-outlet />
+    <div (click)="removeMenu()">
+        <div class="layout">
+            <router-outlet />
+        </div>
+        <app-footer />
     </div>
-    <app-footer />
 </div>
 <div [ngClass]="{'none': isloaded}">
     <app-loader />

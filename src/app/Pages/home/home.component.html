@@ -5,7 +5,7 @@
     <app-offer-card [offer]="allOffers" />
 </section>
 
-<h1>مجموعتنا المميزة</h1>
+<h1>{{ourSpecialCard}}</h1>
 <section class="py-5 my-5 images-holder">
     @for (product of productsImagesUrl; track $index) {
         <img [src]="product.photo" alt="section-title" class="section-title pointer" [routerLink]="['/offer']">

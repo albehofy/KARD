@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeService } from '../../Services/home.service';
-import { BehaviorSubject } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -65,16 +64,16 @@ export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnIn
 
   nextSlide() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-    this.stopAutoScroll();
     if (!this.isAutoScrollPaused) {
+      this.stopAutoScroll();
       this.startAutoScroll();
     }
   }
 
   previousSlide() {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
-    this.stopAutoScroll();
     if (!this.isAutoScrollPaused) {
+      this.stopAutoScroll();
       this.startAutoScroll();
     }
   }

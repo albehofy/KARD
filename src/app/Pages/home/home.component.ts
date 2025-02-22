@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   productsImagesUrl: any = [];
   logos: any = [];
   videoUrl = '';
+  ourSpecialCard:string = '';
   allOffers: any = [];
   private isDataLoaded = false;
 
@@ -85,6 +86,15 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    this.homeService.getParagraphs('ourSpecialCard').subscribe({
+      next: data => {
+        console.log(data);
+        this.ourSpecialCard = data[0].paragraph;
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
     this.homeService.getParagraphs('video_link').subscribe({
       next: data => {
         this.videoUrl = data[0].paragraph;

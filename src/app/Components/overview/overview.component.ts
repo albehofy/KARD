@@ -11,6 +11,7 @@ export class OverviewComponent {
 
 constructor(private addTextService: AddTextService) { }
 items: any = [];
+whyToChooseCard:string = '';
   ngOnInit() {
     this.addTextService.getParagraphs('home_comment0').subscribe({
       next: data => {
@@ -34,6 +35,15 @@ items: any = [];
       next: data => {
         console.log(data);
         this.items[2] = data[0];
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
+    this.addTextService.getParagraphs('whyToChooseCard').subscribe({
+      next: data => {
+        console.log(data);
+        this.whyToChooseCard = data[0].paragraph;
       },
       error: error => {
         console.error('There was an error!', error);

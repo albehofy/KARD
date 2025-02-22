@@ -3,7 +3,7 @@
 }
 
 .about-holder{
-    background-color: beige;
+    background-color: hsl(0deg 0% 93.38%);
     display: flex;
     min-height: 100vh;
     overflow: hidden;
@@ -87,7 +87,7 @@
 }
 
 .card .header{
-    background-color: rgb(238, 238, 206);
+    background-color: hsl(0, 0%, 85%);
     color: #000;
     position: absolute;
     top: 50%;

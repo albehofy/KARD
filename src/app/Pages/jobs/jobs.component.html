@@ -39,9 +39,14 @@
                     <p-select [options]="gender" [(ngModel)]="selectedGender" optionLabel="name" class="w-100" />
                 </div>
                 <div class="input-container">
-                    <label for="phone">الجوال</label>
-                        <input pInputText id="phone" placeholder="0512312312" min="10" max="10" [(ngModel)]="phone" class="w-100" required />
-                </div>
+                    <label for="phone">الجوال:</label>
+                    <input pInputText id="phone" #phoneRef [(ngModel)]="phone" class="w-100"
+                        autocomplete="off" placeholder="0511111111" required maxlength="10" (ngModelChange)="validatePhone($event)" />
+                    
+                    <small *ngIf="isPhoneInvalid" class="danger">
+                        يجب أن يكون رقم الجوال مكون من 10 أرقام
+                        وان يبدأ بـ 05 مثل 0599999999
+                    </small>                </div>
             </div>
     
             <div class="form-group">
@@ -78,7 +83,7 @@
             </div>
     
             <div class="submit-container">
-                <p-button label="إرسال الطلب" (click)="onSubmit()" />
+                <p-button label="إرسال الطلب"  [disabled]="isPhoneInvalid || phoneRef.value ==''" (click)="onSubmit()" />
             </div>
         </div>
     </div>

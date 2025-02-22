@@ -242,4 +242,10 @@ export class JobsComponent implements OnInit {
             this.isPagLoaded.isPageLoaded = true;
         }
     }
+
+    isPhoneInvalid: boolean = false;
+    
+    validatePhone(phone: string): void {
+    this.isPhoneInvalid = phone ? !/^05\d{8}$/.test(phone) : false;
+    }
 }
