@@ -1,6 +1,6 @@
 <footer>
     <h3 class="brand-name">كــــــــــــارد للخياطة الرجالية
-</h3>
+    </h3>
     <h3>متاح لدينا جميع وسائل الدفع &nbsp; , &nbsp; ويمكنك الدفع كاش </h3>
     <img src="/assets/images/payments.png" alt="">
 
@@ -13,9 +13,15 @@
         <li><a [routerLink]="['/return-edit-policy']">سياسة التوصيل والاسترجاع</a></li>
         <li><a [routerLink]="['/e-commerce-authentication']">شهادة توثيق التجارة الالكترونية </a></li>
     </ul>
+    <p>
+        @if (companyData.CRN !== '') {
+        رقم السجل التجاري ({{companyData.CRN}}) &nbsp;&nbsp;
 
-    <p>رقم السجل التجاري ({{companyData.CRN}}) &nbsp;&nbsp;
+        }@if (companyData.TRN !== '') {
         رقم التسجيل الضريبي ({{companyData.TRN}}) &nbsp;&nbsp;
-        شهادة توثيق التجارة الالكترونية ({{companyData.ECC}})</p>
+        }@if (companyData.ECC !== '') {
+        شهادة توثيق التجارة الالكترونية ({{companyData.ECC}})
+        }
+    </p>
     <p class="copyrights">copyright 2025 &nbsp; &nbsp; <strong>KARD - kSA</strong></p>
 </footer>

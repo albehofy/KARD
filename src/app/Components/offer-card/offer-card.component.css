@@ -13,14 +13,15 @@ h1 {
     margin: 0 auto;
     border-bottom: 1px solid #000;
     font-size: 3.5em;
+    margin-top: -14px;
 }
 
 .offers {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-around; */
-    margin-top: 20px;
-    gap: 21px;
+    justify-content: center;
+    margin-top: 7px;
+    gap: 0;
     background-color: transparent;
     font-family: 'pnu', sans-serif;
 }
