@@ -11,9 +11,10 @@ h1 {
     padding-right: 7px;
     width: max-content;
     margin: 0 auto;
-    border-bottom: 1px solid #000;
-    font-size: 3.5em;
-    margin-top: -14px;
+    /* border-bottom: 1px solid #000; */
+    font-size: 2.5em;
+    margin-top: -21px;
+    
 }
 
 .offers {
@@ -27,7 +28,7 @@ h1 {
 }
 
 .offers .offer-card {
-    width: 32%;
+    width: 22%;
     min-width: 270px;
     flex-grow: 1;
     max-width: 300px;
@@ -42,6 +43,8 @@ h1 {
     background-color: #fff;
     /* border-radius: 30% 15% 10% 30%; */
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 21px 21px 0 0;
+    /* overflow: hidden; */
 }
 
 .offers .offer-card img {
@@ -53,6 +56,7 @@ h1 {
     /* border-radius: 30% 15% 10% 30%; */
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     /* position: absolute; */
+    border-radius: 21px 21px 0 0;
 }
 .overlay-container {
     position: relative;
@@ -76,6 +80,8 @@ h1 {
     /* border-radius: 30% 15% 10% 30%; */
     opacity: 0;
     transition: all 0.5s ease;
+    border-radius: 21px 21px 0 0;
+
 }
 .offer-card:hover .overlay {
     opacity: 1;
@@ -113,4 +119,15 @@ h1 {
 
 .price-offer {
     text-decoration: line-through;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .offers .offer-card {
+        width: 97%;
+        max-width: 97%;
+    }
+    .offers .offer-card img {
+        max-height: 370px;
+    }
 }
