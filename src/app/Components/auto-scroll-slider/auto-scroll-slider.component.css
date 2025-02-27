@@ -2,7 +2,9 @@
     width: 100%;
     position: relative;
 }
-
+.overlay {
+    position: relative;
+}
 .slider-wrapper {
     position: absolute;
 }
@@ -43,7 +45,7 @@
     position: absolute;
     top: 50%;
     font-size: 26px;
-    background: #fff;
+    background: #ffffff70;
     padding: 7px 12px;
     border-radius: 50%;
     transform: translateY(-50%);

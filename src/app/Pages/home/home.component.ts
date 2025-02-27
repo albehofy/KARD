@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
       next: data => {
         this.productsImagesUrl = data;
         this.isProductsLoaded = true;
-        this.checkIfDataLoaded();
+        // this.checkIfDataLoaded();
       },
       error: error => {
         console.error('There was an error!', error);
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getParagraphs('logo1').subscribe({
       next: data => {
         this.logos[0] = data[0].paragraph;
-        this.checkIfDataLoaded();
+        // this.checkIfDataLoaded();
       },
       error: error => {
         console.error('There was an error!', error);
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getParagraphs('logo2').subscribe({
       next: data => {
         this.logos[1] = data[0].paragraph;
-        this.checkIfDataLoaded();
+        // this.checkIfDataLoaded();
       },
       error: error => {
         console.error('There was an error!', error);
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getParagraphs('logo3').subscribe({
       next: data => {
         this.logos[2] = data[0].paragraph;
-        this.checkIfDataLoaded();
+        // this.checkIfDataLoaded();
       },
       error: error => {
         console.error('There was an error!', error);
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getParagraphs('video_link').subscribe({
       next: data => {
         this.videoUrl = data[0].paragraph;
-        this.checkIfDataLoaded();
+        // this.checkIfDataLoaded();
       },
       error: error => {
         console.error('There was an error!', error);
@@ -122,11 +122,11 @@ export class HomeComponent implements OnInit {
     // Set a timeout to ensure the loader is displayed for at least 2 seconds
     window.setTimeout(() => {
       this.checkIfDataLoaded();
-    }, 2000);
+    }, 1000);
   }
 
   private checkIfDataLoaded() {
-    if (this.isSliderLoaded && this.isProductsLoaded && this.allOffers.length > 0) {
+    if (this.isSliderLoaded) {
       this.isDataLoaded = true;
       this.isPagLoaded.isPageLoaded = true;
     }

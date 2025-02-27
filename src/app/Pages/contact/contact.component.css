@@ -17,6 +17,7 @@
     line-height: 1.5;
     text-align: center;
     border: 0!important;
+    align-items:stretch
 }
 .bg-white{
     background-color: #FFF;
@@ -29,6 +30,7 @@
 .shadow {
     box-shadow: 0 0 5px 0 #9E9E9E;
 }
+
 .address-container, .other-data {
     width: 40%;
     min-width: 270px;
@@ -69,6 +71,7 @@
     cursor: pointer;
     text-decoration: none;
     width: max-content;
+    max-width: 100%;
 }
 
 .other-data a {

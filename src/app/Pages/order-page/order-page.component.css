@@ -1,19 +1,19 @@
 .data-holder {
-    margin-top: 49px;
+    margin-top: 7px;
 }
 .container-size {
     width: 100%;
-    margin-bottom: 50px;
-    padding-bottom: 14px;
+    margin-bottom: 21px;
+    padding-bottom: 3px;
     position: relative;
     z-index: 1;
     border-radius: 8px;
 }
 
 .logo {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 27px;
+    margin-bottom: 7px;
 }
 
 label {
@@ -22,7 +22,7 @@ label {
 }
 
 ::ng-deep p-breadcrumb nav {
-    margin-bottom: 14px;
+    margin-bottom: 0;
     padding: 0 !important;
 }
 
@@ -54,7 +54,7 @@ header h1 span {
 
 .page-title {
     text-align: justify;
-    padding-bottom: 14px;
+    padding-bottom: 0;
 }
 
 .page-title h2 {
@@ -62,8 +62,8 @@ header h1 span {
 }
 
 .form-group {
-    padding-bottom: 14px;
-    padding-top: 14px;
+    padding-bottom: 0;
+    padding-top: 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

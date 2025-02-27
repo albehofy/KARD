@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnInit {
   currentImageIndex: number = 0;
-  images: string[] = [];
+  images: string[] = ['assets/images/slider/1.png'];
   intervalValue: any;
   isAutoScrollPaused: boolean = false;  // New flag to track pause status
 

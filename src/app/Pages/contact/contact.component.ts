@@ -46,13 +46,29 @@ export class ContactComponent implements OnInit {
         });
 
         // Fetch social media information
+        let index = 0; 
         this.socialMedia.getSocialMedia().subscribe({
             next: (data) => {
-                this.contact.whatsapp = data.whatsapp;
                 console.log(data);
                 this.checkIfDataLoaded();
+                if(data.whatsapp){
+                    this.contact.whatsapp = data.whatsapp;
+                }else {
+                    this.socialMedia.getSocialMedia().subscribe({
+                        next: (data) => {
+                            console.log(data);
+                            this.checkIfDataLoaded();
+                            if(data.whatsapp){
+                                this.contact.whatsapp = data.whatsapp;
+                            }
+                        }
+                    })
+                }
+                console.log(this.contact.whatsapp);
+
             },
             error: (error) => {
+
                 console.log(error);
                 this.checkIfDataLoaded();
             }
