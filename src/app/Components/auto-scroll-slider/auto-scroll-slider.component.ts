@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeService } from '../../Services/home.service';
 import { RouterLink } from '@angular/router';
@@ -7,19 +7,28 @@ import { RouterLink } from '@angular/router';
   selector: 'app-auto-scroll-slider',
   templateUrl: './auto-scroll-slider.component.html',
   styleUrls: ['./auto-scroll-slider.component.css'],
-  imports: [CommonModule,RouterLink]
+  imports: [CommonModule, RouterLink]
 })
 export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnInit {
   currentImageIndex: number = 0;
-  images: string[] = ['assets/images/slider/1.png'];
+  @Input() images: any[] = [
+    {
+      "id": 0,
+      "title": null,
+      "description": "slider image for home page",
+      "photo": 'assets/images/slider/1.png',
+      "price": null,
+      "discountedPrice": null
+    }
+  ];
   intervalValue: any;
   isAutoScrollPaused: boolean = false;  // New flag to track pause status
 
-  
-  constructor(private homeService: HomeService) {
-    
+
+  constructor() {
+
   }
-  
+
   ngAfterViewInit() {
     console.log('Auto scroll slider component initialized');
     if (this.images.length > 0) {
@@ -79,16 +88,16 @@ export class AutoScrollSliderComponent implements AfterViewInit, OnDestroy, OnIn
   }
 
   ngOnInit(): void {
-    this.homeService.getImages('slider image for home page').subscribe({
-      next: data => {
-        this.images = [];
-        data.map((item: any) => {
-          this.images.push(item.photo);
-        })
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    })
+    // this.homeService.getImages('slider image for home page').subscribe({
+    //   next: data => {
+    //     this.images = [];
+    //     data.map((item: any) => {
+    //       this.images.push(item.photo);
+    //     })
+    //   },
+    //   error: error => {
+    //     console.error('There was an error!', error);
+    //   }
+    // })
   }
 }

@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <app-auto-scroll-slider />
 <section class="my-2">
     <div class="data-holder">
@@ -8,7 +9,7 @@
             <div class="form-group">
                 <div class="input-container">
                     <label for="requestTypes">نوع الطلب: </label>
-                    <p-select [options]="allOffers" id="requestTypes" [(ngModel)]="order.order_Serv" optionLabel="name"
+                    <p-select [options]="allOffers" id="requestTypes" [(ngModel)]="order.order_Serv" optionLabel="name" optionValue="id"
                         class="w-100"></p-select>
                 </div>
             </div>

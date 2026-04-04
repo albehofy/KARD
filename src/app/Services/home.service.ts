@@ -19,4 +19,8 @@ export class HomeService {
   getParagraphs(target: string): Observable<any> {
     return this.http.get(environment.API + 'api/paragraph/GetParagraphsByTarget/' + target);
   }
+  getOrders(): Observable<any> {
+    return this.http.get(environment.API + 'api/unit/HomePage');
+  }
+
 }

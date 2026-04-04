@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   videoUrl = '';
   ourSpecialCard:string = '';
   allOffers: any = [];
+  comments: any = [];
+  // carousel: any = [];
   private isDataLoaded = false;
 
   constructor(private homeService: HomeService, private orderService: OrderService, private isPagLoaded: IsPagesLoadedService) { 
@@ -31,30 +33,52 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.homeService.getParagraphs('ourSpecialCard').subscribe({
+      next: data => {
+        console.log(data);
+        this.ourSpecialCard = data[0].paragraph;
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
   }
 
   private loadData() {
-    this.homeService.getImages('slider image for home page').subscribe({
+    this.homeService.getOrders().subscribe({
       next: data => {
-        this.sliderImagesUrl = data;
-        this.isSliderLoaded = true;
-        this.checkIfDataLoaded();
-      },
-      error: err => {
-        console.error('Error loading slider images', err);
-      }
-    });
-
-    this.homeService.getImages('slider image for products').subscribe({
-      next: data => {
-        this.productsImagesUrl = data;
-        this.isProductsLoaded = true;
-        // this.checkIfDataLoaded();
+        console.log(data);
+        this.sliderImagesUrl = data.homePageSliderImages
+        this.allOffers = data.productSliderImages
+        this.productsImagesUrl = data.special_Products;
+        this.comments = data.paragraphs;
+        this.videoUrl = data.video_link;
       },
       error: error => {
         console.error('There was an error!', error);
       }
     });
+    // this.homeService.getImages('slider image for home page').subscribe({
+    //   next: data => {
+    //     this.sliderImagesUrl = data;
+    //     this.isSliderLoaded = true;
+    //     this.checkIfDataLoaded();
+    //   },
+    //   error: err => {
+    //     console.error('Error loading slider images', err);
+    //   }
+    // });
+
+    // this.homeService.getImages('slider image for products').subscribe({
+    //   next: data => {
+    //     this.productsImagesUrl = data;
+    //     this.isProductsLoaded = true;
+    //     // this.checkIfDataLoaded();
+    //   },
+    //   error: error => {
+    //     console.error('There was an error!', error);
+    //   }
+    // });
 
     this.homeService.getParagraphs('logo1').subscribe({
       next: data => {
@@ -86,38 +110,38 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.homeService.getParagraphs('ourSpecialCard').subscribe({
-      next: data => {
-        console.log(data);
-        this.ourSpecialCard = data[0].paragraph;
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    })
-    this.homeService.getParagraphs('video_link').subscribe({
-      next: data => {
-        this.videoUrl = data[0].paragraph;
-        // this.checkIfDataLoaded();
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    });
+    // this.homeService.getParagraphs('ourSpecialCard').subscribe({
+    //   next: data => {
+    //     console.log(data);
+    //     this.ourSpecialCard = data[0].paragraph;
+    //   },
+    //   error: error => {
+    //     console.error('There was an error!', error);
+    //   }
+    // })
+    // this.homeService.getParagraphs('video_link').subscribe({
+    //   next: data => {
+    //     this.videoUrl = data[0].paragraph;
+    //     // this.checkIfDataLoaded();
+    //   },
+    //   error: error => {
+    //     console.error('There was an error!', error);
+    //   }
+    // });
 
-    this.orderService.getAllOffers().subscribe({
-      next: (response) => {
-        response.forEach((element: any) => {
-          if (element.price != null) {
-            this.allOffers.push(element);
-          }
-        });
-        this.checkIfDataLoaded();
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
-      }
-    });
+    // this.orderService.getAllOffers().subscribe({
+    //   next: (response) => {
+    //     response.forEach((element: any) => {
+    //       if (element.price != null) {
+    //         this.allOffers.push(element);
+    //       }
+    //     });
+    //     this.checkIfDataLoaded();
+    //   },
+    //   error: (error) => {
+    //     console.error('There was an error!', error);
+    //   }
+    // });
 
     // Set a timeout to ensure the loader is displayed for at least 2 seconds
     window.setTimeout(() => {
@@ -126,9 +150,7 @@ export class HomeComponent implements OnInit {
   }
 
   private checkIfDataLoaded() {
-    if (this.isSliderLoaded) {
       this.isDataLoaded = true;
       this.isPagLoaded.isPageLoaded = true;
-    }
   }
 }

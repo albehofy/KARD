@@ -6,7 +6,7 @@
         @for (offer of offer; track $index) {
         <a class="offer-card" [routerLink]="['/offer']">
             <div class="overlay-container">
-                <img [src]="'data:image/png;base64,'+offer.photo" alt="offer1">
+                <img [src]="offer.photo" alt="offer1">
                 <div class="overlay">
                     <h4>اطلب المنتج الان</h4>
                 </div>

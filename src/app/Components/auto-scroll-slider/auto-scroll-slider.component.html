@@ -1,6 +1,6 @@
 <div class="slider-container">
     <div class="overlay">
-        <img [src]="images[currentImageIndex]" class="slider pointer" alt="slider 1" [routerLink]="['/offer']">
+        <img [src]="images[currentImageIndex].photo" class="slider pointer" alt="slider 1" [routerLink]="['/offer']">
         <i class="fas fa-chevron-left prev-icon" (click)="previousSlide()"></i>
         <i class="fas fa-chevron-right next-icon" (click)="nextSlide()"></i>
         <!-- <ng-container *ngIf="currentImageIndex == 0">

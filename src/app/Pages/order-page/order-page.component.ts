@@ -155,11 +155,9 @@ export class OrderPageComponent implements OnInit {
     }
 
     addRequest() {
-        if (this.order.order_Serv && this.order.client_City) {
-            this.order.order_Serv = this.order.order_Serv.name;
-            this.order.client_City = this.order.client_City.name;
-        }
-
+        this.order.order_Serv = `${this.order.order_Serv}`;
+        this.order.client_City = this.order.client_City.name;
+console.log("Order Data:", this.order);
         this.orderServices.createOrder(this.order).subscribe({
             next: (data) => {
                 console.log("Order Created:", data);
